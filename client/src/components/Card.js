@@ -44,8 +44,6 @@ export default function Card() {
     currentIndexRef.current = val;
   };
 
-  const canGoBack = currentIndex < db.length - 1;
-
   const canSwipe = currentIndex >= 0;
 
   // set last direction and decrease current index
@@ -67,14 +65,6 @@ export default function Card() {
     if (canSwipe && currentIndex < db.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
-  };
-
-  // increase current index and show card
-  const goBack = async () => {
-    if (!canGoBack) return;
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
   };
 
   return (
@@ -112,12 +102,7 @@ export default function Card() {
         >
           Swipe left!
         </button>
-        <button
-          style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-          onClick={() => goBack()}
-        >
-          Undo swipe!
-        </button>
+
         <button
           style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
           onClick={() => swipe("right")}
