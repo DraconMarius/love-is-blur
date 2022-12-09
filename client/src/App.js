@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./components/Card";
+import PageContainer from "./PageContainer";
 
-const App = () => <Card />;
+const App = () => <PageContainer />;
 
 export default App;
