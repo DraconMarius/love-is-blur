@@ -1,24 +1,24 @@
-#root {
+/* #root {
   text-align: center;
   display: flex;
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  /* background: linear-gradient(#fff, #999); */
+
   background: linear-gradient(#e66465, #9198e5);
-}
+} */
 
 * {
   user-select: none;
 }
 
-#root > div {
+/* #root > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .app {
   overflow: hidden;
@@ -58,6 +58,7 @@ h2 {
   width: 90vw;
   max-width: 260px;
   height: 300px;
+  margin: auto;
 }
 
 .card {
@@ -100,6 +101,7 @@ h2 {
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media (max-width: 625px) {
