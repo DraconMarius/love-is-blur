@@ -5,7 +5,10 @@ const typeDefs = gql`
     _id: ID
     username: String!
     email: String!
-    pw: String!
+    password: String!
+    firstname: String!
+    bio: String!
+    likedBy: [User]
     matches: [Match]
   }
 
@@ -37,7 +40,7 @@ const typeDefs = gql`
   input messageInput {
     messageText: String!
     messageAuthor: String!
-}
+  }
 
   type Query {
     me: User
@@ -52,9 +55,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, pw: String!): CreateUserResult
+    createUser(
+      username: String!
+      email: String!
+      password: String!
+    ): CreateUserResult
     createMatch(user1: ID!, user2: ID!, chatId: ID): Match
-    firstMessage(matchId: ID!, messages:[messageInput]): Chat
+    firstMessage(matchId: ID!, messages: [messageInput]): Chat
     createMessage(chatId: ID!, message: messageInput): Chat
   }
 `;
