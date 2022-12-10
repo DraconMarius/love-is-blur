@@ -45,7 +45,7 @@ const client = new ApolloClient({
 
 function App() {
   const isLoggedIn = localStorage.getItem("id_token");
- 
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -54,11 +54,11 @@ function App() {
           <Routes>
             <Route exact path="/" element={isLoggedIn ? (
               <Home />
-            ): (<navigate replace to="/login" />)} />
-              
-              
-             
-            <Route  exact path="/login" element={<Login />} />
+            ) : (<navigate replace to="/login" />)} />
+
+
+
+            <Route exact path="/login" element={<Login />} />
             <Route exact path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/profile" element={<Profile />} />
