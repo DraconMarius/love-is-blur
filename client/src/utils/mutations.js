@@ -1,16 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
-    mutation createUser($username: String!, $email: String!, $password: String!) {
-        createUser(username:$username, email:$email, password:$password){
-            token
-            user {
-                _id
-                username
-                email
-            }
-        }
+  mutation createUser($username: String!, $email: String!, $password: String!) {
+    createUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        email
+      }
     }
+  }
 `;
 
 export const CREATE_MATCH = gql`
@@ -26,17 +26,17 @@ export const CREATE_MATCH = gql`
 `;
 
 export const firstMessage = gql`
-    mutation firstMessage($matchId: ID!, $messageInput: [messageInput]) {
-        firstMessage(matchId: $matchId, messageInput: $messageInput){
+  mutation firstMessage($matchId: ID!, $messageInput: [messageInput]) {
+    firstMessage(matchId: $matchId, messageInput: $messageInput) {
+      _id
+      messages {
         _id
-        messages {
-            _id
-            messageText
-            messageAuthor
-            createdAt
-            }
-        }
-    } 
+        messageText
+        messageAuthor
+        createdAt
+      }
+    }
+  }
 `;
 
 export const createMessage = gql`
@@ -51,4 +51,19 @@ export const createMessage = gql`
             }
         }
     }
+
+
+`;
+
+export const updateUser = gql`
+  mutation updateUser($userId: ID!, $likedBy: ID!) {
+    updateUser(userId: $userId, likedBy: $likedBy) {
+      _id
+      username
+      email
+      firstName
+      bio
+      likedBy
+    }
+  }
 `;

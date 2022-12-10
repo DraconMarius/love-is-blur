@@ -4,45 +4,62 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        require: true,
-        unique: true,
+  username: {
+    type: String,
+    require: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    //regex for validate
+    match: [/.+@.+\..+/, 'Must be a valid email address'],
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+  },
+  firstName: {
+    type: String,
+    require: true,
+  },
+  image: {
+    type: String,
+  },
+  bio: {
+    type: String,
+    require: true,
+  },
+  likedBy: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        //regex for validate
-        match: [/.+@.+\..+/, 'Must be a valid email address'],
+  ],
+  matches: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Match',
     },
-    pw: {
-        type: String,
-        required: true,
-        minlength: 8,
-    },
-    matches: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Match',
-        },
-    ],
+  ],
 });
 
 //presave Hook for PW update / new user
 userSchema.pre('save', async function (next) {
-    if (this.isModified('pw') || this.isNew) {
-        const saltRounds = 8
-        const salt = await bcrypt.genSalt(saltRounds);
-        this.pw = await bcrypt.hash(this.pw, salt);
-    }
-    //relinquish control
-    next();
+  if (this.isModified('password') || this.isNew) {
+    const saltRounds = 8;
+    const salt = await bcrypt.genSalt(saltRounds);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  //relinquish control
+  next();
 });
 
 //Making sure every instance of user can access `validate PW`
-userSchema.methods.validatePW = async function (pw) {
-    return bcrypt.compare(pw, this.pw);
+userSchema.methods.validatePW = async function (password) {
+  return bcrypt.compare(password, this.password);
 };
 
 //creating model from schema,
