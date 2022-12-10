@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 // import logo from "./assets/chris-gibson-high-resolution-logo-color-on-transparent-background.png";
 // import "../components/styles/navbar.css";
 // Here we are using object destructuring assignment to pluck off our variables from the props object
@@ -25,37 +25,33 @@ function NavigationTabs({ currentPage, handlePageChange }) {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <a
-            href="#aboutMe"
+            href="#home"
             // onClick={() => handlePageChange("AboutMe")}
             // Check to see if the currentPage is `About`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
             className={
-              currentPage !== 'AboutMe' ? 'navbar-item' : 'navbar-item is-info'
+              currentPage !== "Home" ? "navbar-item" : "navbar-item is-info"
             }
           >
-            About Me
+            Home
           </a>
 
           <a
-            href="#portfolio"
+            href="#chat"
             // onClick={() => handlePageChange("Portfolio")}
             // Check to see if the currentPage is `Blog`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
             className={
-              currentPage !== 'Portfolio'
-                ? 'navbar-item'
-                : 'navbar-item is-info'
+              currentPage !== "Chat" ? "navbar-item" : "navbar-item is-info"
             }
           >
-            Portfolio
+            Chat
           </a>
 
           <a
-            href="#contactMe"
+            href="#profile"
             // onClick={() => handlePageChange("ContactMe")}
             // Check to see if the currentPage is `Contact`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
             className={
-              currentPage !== 'ContactMe'
-                ? 'navbar-item'
-                : 'navbar-item is-info'
+              currentPage !== "Profile" ? "navbar-item" : "navbar-item is-info"
             }
           >
             Contact Me
@@ -66,7 +62,7 @@ function NavigationTabs({ currentPage, handlePageChange }) {
             // onClick={() => handlePageChange("Resume")}
             // Check to see if the currentPage is `Contact`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
             className={
-              currentPage !== 'Resume' ? 'navbar-item' : 'navbar-item is-info'
+              currentPage !== "Resume" ? "navbar-item" : "navbar-item is-info"
             }
           >
             Resume
