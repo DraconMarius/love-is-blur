@@ -11,8 +11,8 @@ const typeDefs = gql`
 
   type Match {
     _id: ID
-    user1: String!
-    user2: String!
+    user1: ID!
+    user2: ID!
     chatId: [Chat]
     createdAt: String
   }
@@ -41,9 +41,9 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    user(userID: String!): User
+    user(userId: ID!): User
     users: [User]
-    match(userID: String!): Match
+    match(matchID: ID!): Match
   }
 
   type CreateUserResult {
@@ -53,8 +53,8 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(username: String!, email: String!, pw: String!): CreateUserResult
-    createMatch(user1: String!, user2: String!, chatId: String): Match
-    firstMessage(matchId: String, messages:[messageInput]): Chat
+    createMatch(user1: ID!, user2: ID!, chatId: ID): Match
+    firstMessage(matchId: ID!, messages:[messageInput]): Chat
     createMessage(chatId: ID!, message: messageInput): Chat
   }
 `;
