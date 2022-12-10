@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../graphql/mutations";
+import { CREATE_USER } from "../utils/mutations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLock,
@@ -17,7 +17,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -34,7 +34,7 @@ const SignUp = () => {
     event.preventDefault();
     console.log(formState);
     try {
-      const { data } = await addUser({
+      const { data } = await createUser({
         variables: { ...formState },
       });
 
@@ -53,10 +53,10 @@ const SignUp = () => {
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
         <form onSubmit={handleFormSubmit}>
-          <div class="field">
-            <p class="control has-icons-left has-icons-right">
+          <div className="field">
+            <p className="control has-icons-left has-icons-right">
               <input
-                class="input"
+                className="input"
                 type="name"
                 placeholder="name"
                 name="name"
@@ -68,42 +68,42 @@ const SignUp = () => {
               </span>
             </p>
           </div>
-          <div class="field">
-            <p class="control has-icons-left has-icons-right">
+          <div className="field">
+            <p className="control has-icons-left has-icons-right">
               <input
-                class="input"
+                className="input"
                 type="email"
                 placeholder="Email"
                 name="email"
                 value={formState.email}
                 onChange={handleChange}
               />
-              <span class="icon is-small is-left">
+              <span className="icon is-small is-left">
                 <FontAwesomeIcon icon={faEnvelope} />
               </span>
-              <span class="icon is-small is-right">
+              <span className="icon is-small is-right">
                 <FontAwesomeIcon icon={faCheck} />
               </span>
             </p>
           </div>
-          <div class="field">
-            <p class="control has-icons-left">
+          <div className="field">
+            <p className="control has-icons-left">
               <input
-                class="input"
+                className="input"
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={formState.password}
                 onChange={handleChange}
               />
-              <span class="icon is-small is-left">
+              <span className="icon is-small is-left">
                 <FontAwesomeIcon icon={faLock} />
               </span>
             </p>
           </div>
-          <div class="field">
-            <p class="control">
-              <button class="button is-success">signup</button>
+          <div className="field">
+            <p className="control">
+              <button className="button is-success">signup</button>
             </p>
             <p>
               already have an account? <Link to="/login">Signup</Link>

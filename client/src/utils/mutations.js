@@ -13,9 +13,11 @@ export const CREATE_USER = gql`
   }
 `;
 
+
+
 export const CREATE_MATCH = gql`
     mutation createMatch($user1: String!, $user2: String!) {
-        createMatch(user1:$user1, $user2:user2){
+        createMatch(user1:$user1, user2:$user2){
             _id
             user1
             user2
@@ -25,7 +27,7 @@ export const CREATE_MATCH = gql`
     }
 `;
 
-export const firstMessage = gql`
+export const FIRST_MSG = gql`
   mutation firstMessage($matchId: ID!, $messageInput: [messageInput]) {
     firstMessage(matchId: $matchId, messageInput: $messageInput) {
       _id
@@ -39,9 +41,9 @@ export const firstMessage = gql`
   }
 `;
 
-export const createMessage = gql`
+export const CREATE_MESSAGE = gql`
     mutation createMessage($chatId: ID!, $messageInput: messageInput) {
-        createMessage(chatId: $chatId ,$messageInput: messageInput){
+        createMessage(chatId: $chatId , messageInput: $messageInput){
             _id
             messages {
                 _id
@@ -55,7 +57,7 @@ export const createMessage = gql`
 
 `;
 
-export const updateUser = gql`
+export const UPDATE_USER = gql`
   mutation updateUser($userId: ID!, $likedBy: ID!) {
     updateUser(userId: $userId, likedBy: $likedBy) {
       _id
@@ -64,6 +66,22 @@ export const updateUser = gql`
       firstName
       bio
       likedBy
+    }
+  }
+`;
+
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        email
+        firstName
+        bio
+        likedBy
+      }
     }
   }
 `;

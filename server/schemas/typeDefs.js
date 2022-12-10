@@ -60,9 +60,11 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): CreateUserResult
+    login(email:String!, pasword:String!) : Auth
     createMatch(user1: ID!, user2: ID!, chatId: ID): Match
     firstMessage(matchId: ID!, messages: [messageInput]): Chat
     createMessage(chatId: ID!, message: messageInput): Chat
+    updateUser(userId: ID!, likedBy: ID!): User
   }
 `;
 
