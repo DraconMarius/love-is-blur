@@ -9,8 +9,8 @@ const resolvers = {
             return User.findById(context.user._id).populate('matches')
         },
 
-        user: async (parent, args) => {
-            return User.findById(args.userId).populate('matches')
+        user: async (parent, { userId }) => {
+            return User.findById(userId).populate('matches')
         },
 
         users: async () => {
@@ -32,8 +32,23 @@ const resolvers = {
         },
 
         createMatch: async (parent, { user1, user2 }) => {
-            const newMatch = await Match.create(args);
 
+            const MatchData = { user1, user2 };
+
+            const newMatch = await Match.create(MatchData);
+
+            //update Both user with the created match
+            await User.findByIdAndUpdate(
+                user1,
+                { $addToSet: { matches: newMatch._id } },
+                { new: true }
+            )
+
+            await User.findByIdAndUpdate(
+                user2,
+                { $addToSet: { matches: newMatch._id } },
+                { new: true }
+            )
             return (newMatch);
         },
         //create Chat with first message, update Match with the newly created chatID
