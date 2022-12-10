@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import Auth from "../../utils/auth";
 // import logo from "./assets/chris-gibson-high-resolution-logo-color-on-transparent-background.png";
 // import "../components/styles/navbar.css";
 // Here we are using object destructuring assignment to pluck off our variables from the props object
@@ -24,49 +27,67 @@ function NavigationTabs({ currentPage, handlePageChange }) {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a
-            href="#home"
-            // onClick={() => handlePageChange("AboutMe")}
-            // Check to see if the currentPage is `About`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
+          <Link
+            to="/home"
+            onClick={() => handlePageChange("Home")}
             className={
               currentPage !== "Home" ? "navbar-item" : "navbar-item is-info"
             }
           >
             Home
-          </a>
+          </Link>
+          {Auth.loggedIn() ? (
+            <>
+              <Link
+                to="/chat"
+                onClick={() => handlePageChange("Chat")}
+                className={
+                  currentPage !== "Chat" ? "navbar-item" : "navbar-item is-info"
+                }
+              >
+                Chat
+              </Link>
 
-          <a
-            href="#chat"
-            // onClick={() => handlePageChange("Portfolio")}
-            // Check to see if the currentPage is `Blog`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
-            className={
-              currentPage !== "Chat" ? "navbar-item" : "navbar-item is-info"
-            }
-          >
-            Chat
-          </a>
+              <Link
+                to="/profile"
+                onClick={() => handlePageChange("Profile")}
+                className={
+                  currentPage !== "Profile"
+                    ? "navbar-item"
+                    : "navbar-item is-info"
+                }
+              >
+                profile
+              </Link>
 
-          <a
-            href="#profile"
-            // onClick={() => handlePageChange("ContactMe")}
-            // Check to see if the currentPage is `Contact`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
-            className={
-              currentPage !== "Profile" ? "navbar-item" : "navbar-item is-info"
-            }
-          >
-            Contact Me
-          </a>
-
-          <a
-            href="#resume"
-            // onClick={() => handlePageChange("Resume")}
-            // Check to see if the currentPage is `Contact`, and if so we use the active link className from bootstrap. Otherwise, we set it to a normal nav-link
-            className={
-              currentPage !== "Resume" ? "navbar-item" : "navbar-item is-info"
-            }
-          >
-            Resume
-          </a>
+              <Link
+                to="/swipe"
+                onClick={() => handlePageChange("Swipe")}
+                className={
+                  currentPage !== "Swipe"
+                    ? "navbar-item"
+                    : "navbar-item is-info"
+                }
+              >
+                Swipe
+              </Link>
+            </>
+          ) : (
+            <>
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <Link to="/signup" class="button is-primary">
+                      <strong>Sign up</strong>
+                    </Link>
+                    <Link to="/login" class="button is-light">
+                      Log in
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </nav>
