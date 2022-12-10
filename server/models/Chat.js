@@ -1,12 +1,29 @@
-//mongoose connection set up
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
+const { message } = require('./Message');
 
-mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/programming-thoughts',
+const chatSchema = new Schema({
+  messages: [
     {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
-);
+      messageText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      messageAuthor: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    },
+  ],
+});
 
-module.exports = mongoose.connection;
+const Chat = model('Chat', chatSchema);
+
+module.exports = Chat;
