@@ -48,23 +48,24 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
+      {/* <Router> */}
+      <div>
 
-          <Routes>
-            <Route exact path="/" element={isLoggedIn ? (
-              <Home />
-            ) : (<navigate replace to="/login" />)} />
+        <Routes>
+          {/* <Route 
+          exact path="/" element={isLoggedIn ? (
+            <Home />
+          ) : (<Navigate replace to="/login" />)} /> */}
 
 
-
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/chat" element={<Chat />} />
-            <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/profile" element={<Profile />} />
-          </Routes>
-        </div>
-      </Router>
+          {/* <Route exact path="/home" element={<Home />} /> */}
+          <Route exact path="/login" element={<Login />} />
+          {/* <Route exact path="/chat" element={<Chat />} /> */}
+          <Route exact path="/signup" element={<SignUp />} />
+          {/* <Route exact path="/profile" element={<Profile />} /> */}
+        </Routes>
+      </div>
+      {/* </Router> */}
     </ApolloProvider>
   );
 }
