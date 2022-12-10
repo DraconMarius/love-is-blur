@@ -68,7 +68,7 @@ export default function Card() {
   };
 
   return (
-    <div>
+    <div className="is-fullheight has-background-dark">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -78,37 +78,39 @@ export default function Card() {
         rel="stylesheet"
       />
       <h1>Love is Blurr</h1>
+      <div>
+        <div className="cardContainer ">
+          {db.map((character, index) => (
+            <TinderCard
+              ref={childRefs[index]}
+              className="swipe"
+              key={character.name}
+              onSwipe={(dir) => swiped(dir, character.name, index)}
+              onCardLeftScreen={() => outOfFrame(character.name, index)}
+            >
+              <div className="card">
+                <h3>{character.name}</h3>
+              </div>
+            </TinderCard>
+          ))}
+        </div>
 
-      <div className="cardContainer">
-        {db.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            className="swipe"
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
+        <div className="buttons">
+          <button
+            style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+            onClick={() => swipe("left")}
           >
-            <div className="card">
-              <h3>{character.name}</h3>
-            </div>
-          </TinderCard>
-        ))}
+            Swipe left!
+          </button>
+
+          <button
+            style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+            onClick={() => swipe("right")}
+          >
+            Swipe right!
+          </button>
+
       </div>
-
-      <div className="buttons">
-        <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("left")}
-        >
-          Swipe left!
-        </button>
-
-        <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("right")}
-        >
-          Swipe right!
-        </button>
       </div>
       {lastDirection ? (
         <h2 key={lastDirection} className="infoText">

@@ -8,6 +8,9 @@ function NavigationTabs({ currentPage, handlePageChange }) {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
+        <a class="navbar-item" href="#">
+          Love is Blurr
+        </a>
         <a
           role="button"
           className="navbar-burger"
@@ -23,7 +26,7 @@ function NavigationTabs({ currentPage, handlePageChange }) {
       </div>
 
       <div id="navbarBasicExample" className="navbar-menu">
-        <div className="navbar-start">
+        <div className="navbar-end">
           <a
             href="#aboutMe"
             // onClick={() => handlePageChange("AboutMe")}
