@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import {
   ApolloClient,
@@ -46,23 +45,23 @@ const client = new ApolloClient({
 
 function App() {
   const isLoggedIn = localStorage.getItem("id_token");
-  let Navigate;
-
-  if (isLoggedIn === null && window.location.pathname !== "/signup") {
-    Navigate = <Navigate to="/login" />;
-  }
+ 
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
-          {Navigate}
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route exact path="/" element={isLoggedIn ? (
+              <Home />
+            ): (<navigate replace to="/login" />)} />
+              
+              
+             
+            <Route  exact path="/login" element={<Login />} />
+            <Route exact path="/chat" element={<Chat />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </Router>
