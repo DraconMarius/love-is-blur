@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v3/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa25L7W0Q5n-wU.woff2)
+    format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  min-height: 90vh;
+}
+
+section {
+  box-sizing: border-box;
+  width: 100%;
+  height: 101vh;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 50px;
+  background: #ff0055;
+  font-weight: 700;
+  font-family: "Inter-Bold", "Inter", sans-serif;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 64px;
+  letter-spacing: -4px;
+}
+
+section:nth-child(2) {
+  background: url(../../images/mountainCouple.png);
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+section:nth-child(3) {
+  background: url(../../images/wineryCouple.png);
+  background-size: cover;
+  background-position: center;
+}
+
+section:nth-child(4) {
+  background: url(../../images/sunsetCouple.png);
+  background-size: cover;
+  background-position: center;
+}
+
+section span {
+  display: block;
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+/* * {
+    font-weight: 700;
+    font-family: "Inter-Bold", "Inter", sans-serif;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 64px;
+    letter-spacing: -4px;
+  } */
+
+/* h3 {
+  position: absolute;
+  color: white;
+  font-size: 25px;
+  font-weight: 200;
+  padding: 1.5rem;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  letter-spacing: 2px;
+} */

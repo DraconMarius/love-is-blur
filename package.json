@@ -11,7 +11,9 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-tinder-card": "^1.6.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-moving-text": "^0.0.7",
+    "framer": "^2.2.1"
   },
   "scripts": {
     "start": "node server/server.js",
