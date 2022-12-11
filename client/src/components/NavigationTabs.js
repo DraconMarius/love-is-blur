@@ -39,7 +39,7 @@ function NavigationTabs({ handlePageChange }) {
             whileTap={{ scale: 0.9 }}
           >
             <Link
-              to="/home" onClick={() => handlePageChange("Home")}
+              to="/home"
             >
               Home
             </Link>
@@ -51,7 +51,7 @@ function NavigationTabs({ handlePageChange }) {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Link to="/chat" onClick={() => handlePageChange("Chat")}>
+                <Link to="/chat">
                   Chat
                 </Link>
               </motion.div>
@@ -60,7 +60,7 @@ function NavigationTabs({ handlePageChange }) {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Link to="/profile" onClick={() => handlePageChange("Profile")}>
+                <Link to="/profile">
                   profile
                 </Link>
               </motion.div>
@@ -70,7 +70,7 @@ function NavigationTabs({ handlePageChange }) {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Link to="/swipe" onClick={() => handlePageChange("Swipe")}>
+                <Link to="/swipe">
                   Swipe
                 </Link>
               </motion.div>
@@ -86,9 +86,7 @@ function NavigationTabs({ handlePageChange }) {
                       whileTap={{ scale: 0.9 }}
                     >
                       <Link
-                        to="/signup"
-                        onClick={() => handlePageChange("SignUp")}
-                      >
+                        to="/signup">
                         Sign Up
                       </Link>
                     </motion.div>
@@ -98,9 +96,7 @@ function NavigationTabs({ handlePageChange }) {
                       whileTap={{ scale: 0.9 }}
                     >
                       <Link
-                        to="/login"
-                        onClick={() => handlePageChange("Login")}
-                      >
+                        to="/login">
                         Log in
                       </Link>
                     </motion.div>
@@ -111,7 +107,7 @@ function NavigationTabs({ handlePageChange }) {
           )}
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }
 

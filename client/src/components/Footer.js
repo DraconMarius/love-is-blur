@@ -5,7 +5,7 @@ import "../styles/footer.css";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 export default function Footer() {
   return (
-    <footer className="footer">
+    <div className="footer">
       <div className="column is-full  ">
         <div className="content has-text-centered ">
           <div
@@ -20,6 +20,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }
