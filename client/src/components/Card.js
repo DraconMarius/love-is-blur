@@ -1,27 +1,27 @@
-import React, { useState, useMemo, useRef } from "react";
-import TinderCard from "react-tinder-card";
-import "../styles/Card.css";
+import React, { useState, useMemo, useRef } from 'react';
+import TinderCard from 'react-tinder-card';
+import '../styles/Card.css';
 
 const db = [
   {
-    name: "Richard Hendricks",
-    interest: "hiking",
+    name: 'Richard Hendricks',
+    interest: 'hiking',
   },
   {
-    name: "Erlich Bachman",
-    interest: "baking",
+    name: 'Erlich Bachman',
+    interest: 'baking',
   },
   {
-    name: "Monica Hall",
-    interest: "running",
+    name: 'Monica Hall',
+    interest: 'running',
   },
   {
-    name: "Jared Dunn",
-    interest: "bball",
+    name: 'Jared Dunn',
+    interest: 'bball',
   },
   {
-    name: "Dinesh Chugtai",
-    interest: "biking",
+    name: 'Dinesh Chugtai',
+    interest: 'biking',
   },
 ];
 
@@ -68,7 +68,7 @@ export default function Card() {
   };
 
   return (
-    <div>
+    <div className="mainComponent">
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -97,15 +97,15 @@ export default function Card() {
 
       <div className="buttons">
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("left")}
+          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
+          onClick={() => swipe('left')}
         >
           Swipe left!
         </button>
 
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("right")}
+          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
+          onClick={() => swipe('right')}
         >
           Swipe right!
         </button>
