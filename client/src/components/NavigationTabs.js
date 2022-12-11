@@ -1,19 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import "../styles/NavigationTabs.css";
+import { useState } from "react";
+import Auth from "../utils/auth";
 
-import Auth from "../../utils/auth";
-// import logo from "./assets/chris-gibson-high-resolution-logo-color-on-transparent-background.png";
-// import "../components/styles/navbar.css";
-// Here we are using object destructuring assignment to pluck off our variables from the props object
-// We assign them to their own variable names
-/* eslint-disable */
-function NavigationTabs({ currentPage, handlePageChange }) {
+/* eslint-disable jsx-a11y/anchor-is-valid */
+function NavigationTabs({ handlePageChange }) {
+  const [isActive, setisActive] = useState(false);
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a
+          onClick={() => {
+            setisActive(!isActive);
+          }}
           role="button"
-          className="navbar-burger"
+          className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
@@ -25,64 +28,78 @@ function NavigationTabs({ currentPage, handlePageChange }) {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div
+        id="navbarBasicExample"
+        className={`navbar-menu ${isActive ? "is-active" : ""}`}
+      >
         <div className="navbar-start">
-          <Link
-            to="/home"
-            onClick={() => handlePageChange("Home")}
-            className={
-              currentPage !== "Home" ? "navbar-item" : "navbar-item is-info"
-            }
+          <motion.div
+            className="nav-link"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            Home
-          </Link>
+            <Link
+              to="/home"
+            >
+              Home
+            </Link>
+          </motion.div>
           {Auth.loggedIn() ? (
             <>
-              <Link
-                to="/chat"
-                onClick={() => handlePageChange("Chat")}
-                className={
-                  currentPage !== "Chat" ? "navbar-item" : "navbar-item is-info"
-                }
+              <motion.div
+                className="nav-link"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                Chat
-              </Link>
+                <Link to="/chat">
+                  Chat
+                </Link>
+              </motion.div>
+              <motion.div
+                className="nav-link"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link to="/profile">
+                  profile
+                </Link>
+              </motion.div>
 
-              <Link
-                to="/profile"
-                onClick={() => handlePageChange("Profile")}
-                className={
-                  currentPage !== "Profile"
-                    ? "navbar-item"
-                    : "navbar-item is-info"
-                }
+              <motion.div
+                className="nav-link"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                profile
-              </Link>
-
-              <Link
-                to="/swipe"
-                onClick={() => handlePageChange("Swipe")}
-                className={
-                  currentPage !== "Swipe"
-                    ? "navbar-item"
-                    : "navbar-item is-info"
-                }
-              >
-                Swipe
-              </Link>
+                <Link to="/swipe">
+                  Swipe
+                </Link>
+              </motion.div>
             </>
           ) : (
             <>
-              <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <Link to="/signup" class="button is-primary">
-                      <strong>Sign up</strong>
-                    </Link>
-                    <Link to="/login" class="button is-light">
-                      Log in
-                    </Link>
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <div className="buttons">
+                    <motion.div
+                      className="sign-up"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Link
+                        to="/signup">
+                        Sign Up
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      className="login"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Link
+                        to="/login">
+                        Log in
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -90,7 +107,7 @@ function NavigationTabs({ currentPage, handlePageChange }) {
           )}
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }
 

@@ -19,6 +19,9 @@
     "react-scripts": "5.0.1",
     "react-tinder-card": "^1.6.2",
     "socket.io-client": "^4.5.4"
+
+    "react-moving-text": "^0.0.7",
+    "framer": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
