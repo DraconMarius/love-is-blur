@@ -1,0 +1,28 @@
+.nav-link {
+  margin: 0 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.sign-up {
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.login {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.navbar-start {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0rem;
+}

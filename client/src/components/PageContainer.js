@@ -1,8 +1,6 @@
 // import React, { useState } from "react";
-import NavigationTabs from './NavigationTabs';
-import Footer from './Footer';
 
-import Card from './Card';
+import Home from "../pages/Home";
 
 export default function PageContainer() {
   //   const [currentPage, setCurrentPage] = useState("AboutMe");
@@ -27,14 +25,10 @@ export default function PageContainer() {
   return (
     <div>
       {/* We are passing the currentPage from state and the function to update it */}
-      <NavigationTabs
-      // currentPage={currentPage}
-      // handlePageChange={handlePageChange}
-      />
+
       {/* Here we are calling the renderPage method which will return a component  */}
-      <Card />
+      <Home />
       {/* {renderPage()} */}
-      <Footer />
     </div>
   );
 }
