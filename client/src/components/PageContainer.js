@@ -1,10 +1,10 @@
 // import React, { useState } from "react";
-import NavigationTabs from "./NavigationTabs";
+import NavigationTabs from './NavigationTabs';
+import Footer from './Footer';
 
-import Card from "./Card";
+import Card from './Card';
 
-
-export default function PortfolioContainer() {
+export default function PageContainer() {
   //   const [currentPage, setCurrentPage] = useState("AboutMe");
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
@@ -34,6 +34,7 @@ export default function PortfolioContainer() {
       {/* Here we are calling the renderPage method which will return a component  */}
       <Card />
       {/* {renderPage()} */}
+      <Footer />
     </div>
   );
 }
