@@ -19,7 +19,7 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-/*####################### Created by Luiz ##################################*/
+/*################# Created by Luiz ######################*/
 app.use(cors());
 
 const serverSocket = http.createServer(app);
@@ -55,7 +55,7 @@ serverSocket.listen(3002, () => {
   console.log("Server running")
 } );
 
-/*####################### Created by Luiz ##############################*/
+/*############# Created by Luiz ###################*/
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
