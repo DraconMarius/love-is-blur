@@ -13,9 +13,11 @@ import Auth from "../utils/auth";
 
 const SignUp = () => {
   const [formState, setFormState] = useState({
-    name: "",
+    username: "",
+    firstName: "",
     email: "",
     password: "",
+    bio: "",
   });
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
@@ -44,9 +46,32 @@ const SignUp = () => {
     }
     // clear form values
     setFormState({
+      username: "",
+      firstName: "",
       email: "",
       password: "",
+      bio: "",
     });
+  };
+  const cloudName = "dp9s1u3uv";
+  const uploadPreset = "ml_default";
+  const myWidget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
+      cropping: true,
+      multiple: false,
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+      }
+    }
+  );
+
+  const openWidget = (myWidget) => {
+    // event.preventDefault();
+    myWidget.open();
   };
 
   return (
@@ -57,10 +82,25 @@ const SignUp = () => {
             <p className="control has-icons-left has-icons-right">
               <input
                 className="input"
+                type="username"
+                placeholder="username"
+                name="username"
+                value={formState.username}
+                onChange={handleChange}
+              />
+              <span className="icon is-small is-left">
+                <FontAwesomeIcon icon={faUser} />
+              </span>
+            </p>
+          </div>
+          <div className="field">
+            <p className="control has-icons-left has-icons-right">
+              <input
+                className="input"
                 type="name"
                 placeholder="name"
-                name="name"
-                value={formState.name}
+                name="firstName"
+                value={formState.firstName}
                 onChange={handleChange}
               />
               <span className="icon is-small is-left">
@@ -101,12 +141,34 @@ const SignUp = () => {
               </span>
             </p>
           </div>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label"></label>
+            </div>
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <textarea
+                    name="bio"
+                    className="textarea"
+                    placeholder="Enter a short bio"
+                    value={formState.bio}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="field">
             <p className="control">
               <button className="button is-success">signup</button>
-            </p>
-            <p>
-              already have an account? <Link to="/login">Signup</Link>
+              <button
+                className="button is-success"
+                onClick={() => openWidget(myWidget)}
+                type="button"
+              >
+                upload Photo
+              </button>
             </p>
           </div>
           <div>
