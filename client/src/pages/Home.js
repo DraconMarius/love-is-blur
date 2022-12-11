@@ -27,11 +27,11 @@ function Section({ children }) {
   );
 }
 
-export default function App() {
+export default function Home() {
   return (
     <>
       <main className="main-container">
-        <NavigationTabs />
+
         <Section className="welcome-section">
           <h1>
             Welcome to Love is Blur!A dating app for people who are looking for
@@ -54,8 +54,8 @@ export default function App() {
         <Section className="try-it">
           <h1>Try it out!</h1>
         </Section>
-        <Footer />
       </main>
+      {/* <Footer /> */}
     </>
   );
 }

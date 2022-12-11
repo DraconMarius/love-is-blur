@@ -9,11 +9,13 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Chat from './pages/Chat';
+import Swipe from './pages/Swipe';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import PageContainer from './components/PageContainer';
+import NavigateTabs from './components/NavigationTabs';
+import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -47,22 +49,25 @@ function App() {
     <ApolloProvider client={client}>
       {/* <Router> */}
       <div>
-        <PageContainer>
-          <Routes>
-            {/* <Route 
+        {/* <PageContainer> */}
+        <NavigateTabs />
+        <Routes>
+          {/* <Route 
           exact path="/" element={isLoggedIn ? (
-            <Home />
           ) : (<Navigate replace to="/login" />)} /> */}
 
-            {/* <Route exact path="/home" element={<Home />} /> */}
-            <Route exact path="/login" element={<Login />} />
-            {/* <Route exact path="/chat" element={<Chat />} /> */}
-            <Route exact path="/signup" element={<SignUp />} />
-            {/* <Route exact path="/profile" element={<Profile />} /> */}
-          </Routes>
-        </PageContainer>
+
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          {/* <Route exact path="/chat" element={<Chat />} /> */}
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/swipe" element={<Swipe />} />
+          {/* <Route exact path="/profile" element={<Profile />} /> */}
+        </Routes>
+        {/* </PageContainer> */}
       </div>
       {/* </Router> */}
+      <Footer />
     </ApolloProvider>
   );
 }
