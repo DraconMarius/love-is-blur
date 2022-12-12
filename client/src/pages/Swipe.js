@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import "../styles/Card.css";
+import { useQuery } from "@apollo/client";
+import { ALL_USER } from '../utils/queries';
 
 const db = [
   {
@@ -25,11 +27,18 @@ const db = [
   },
 ];
 
+
+
 export default function Card() {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
+
+  const { loading, error, data } = useQuery(ALL_USER);
+  const users = data?.users || [];
+
+  // console.log(data) //undefined
 
   const childRefs = useMemo(
     () =>
@@ -69,6 +78,7 @@ export default function Card() {
 
   return (
     <div className="mainComponent">
+      {loading ? (<div>loading</div>) : (console.log(users))}
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
