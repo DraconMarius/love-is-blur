@@ -7,6 +7,7 @@ export const CREATE_USER = gql`
     $password: String!
     $firstname: String!
     $bio: String!
+    $image: String
   ) {
     createUser(
       username: $username
@@ -14,6 +15,7 @@ export const CREATE_USER = gql`
       password: $password
       firstname: $firstname
       bio: $bio
+      image: $image
     ) {
       token
       user {
