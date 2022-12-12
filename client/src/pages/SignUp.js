@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Navigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import "../styles/signup.css";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../utils/mutations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,7 +26,6 @@ const SignUp = () => {
   // const [imgURL, setimgURL] = useState("");
   const imgURL = useRef("");
 
-
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   // update state based on form input changes
@@ -47,7 +48,7 @@ const SignUp = () => {
         variables: { ...formState, image: imgURL.current },
       });
       console.log(formState);
-      console.log(imgURL)
+      console.log(imgURL);
       // console.log(data.createUser.user)
       // console.log(data.createUser.token)
       Auth.login(data.createUser.token);
@@ -78,8 +79,8 @@ const SignUp = () => {
         console.log("Done! Here is the image info: ", result.info);
         // const urlString = result.info.url
         imgURL.current = result.info.url;
-        console.log(result.info.url)
-        console.log(imgURL.current)
+        console.log(result.info.url);
+        console.log(imgURL.current);
       }
     }
   );
@@ -157,15 +158,12 @@ const SignUp = () => {
             </p>
           </div>
           <div className="field is-horizontal">
-            <div className="field-label is-normal">
-              <label className="label"></label>
-            </div>
             <div className="field-body">
-              <div className="field">
+              <div className="field ">
                 <div className="control">
                   <textarea
                     name="bio"
-                    className="textarea"
+                    className="textarea "
                     placeholder="Enter a short bio"
                     value={formState.bio}
                     onChange={handleChange}
@@ -176,14 +174,23 @@ const SignUp = () => {
           </div>
           <div className="field">
             <p className="control">
-              <button className="button is-success">signup</button>
-              <button
+              <motion.button
+                className="button is-success"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                signup
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                id="upload-widget-button"
                 className="button is-success"
                 onClick={() => openWidget(myWidget)}
                 type="button"
               >
                 upload Photo
-              </button>
+              </motion.button>
             </p>
           </div>
           <div>
