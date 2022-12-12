@@ -5,14 +5,15 @@ import  Messages  from './Messages'
 const socket = io.connect("http://localhost:3002");
 
 function Chat() {
-    const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false); // only show the chat if the show chat is equal to true
+  const [showChat, setShowChat] = useState(false); // only show the chat if the show chat is equal to truehere
 
 const joinRoom = () => {
   if (username !=="" & room !=="") {
     socket.emit("join_room", room);
     setShowChat(true);
+    console.log(socket.id)
   }
 }
 

@@ -39,12 +39,14 @@ io.on("connection", (socket) => {//listen for an event
     console.log(`User with ID: ${socket.id} join room: ${data}`);
   })
 
-  socket.on("send_message", (data) => {// get the user message in the room
-    //data.room will separete the messages per room
-    socket.to(data.room).emit("receive_message", data)
-    // console.log(data);
+
+  socket.on("send_message", (data) =>{// get the user message in the room
+      //data.room will separete the messages per room
+      socket.to(data.room).emit("receive_message",data)
+      console.log(data.author + " " + data.message);
 
   })
+
 
   socket.on("disconnect", () => { // disconnect a user 
     console.log("User disconnected", socket.id)

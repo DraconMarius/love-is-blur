@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+// import { useMutation } from "@apollo/client";
+// import { FIRST_MSG, CREATE_MESSAGE  } from "../utils/mutations";
+
 
 export default function Messages({socket, username, room}) {
     const [currentMessage, setCurrentMessage] = useState("");
@@ -20,7 +23,12 @@ export default function Messages({socket, username, room}) {
              await socket.emit("send_message", messageData);
              setMessageList((list) => [...list,messageData]);
              setCurrentMessage(""); //set the current message to be empty
+
+             console.log("Author: " + messageData.author + " message details: " + messageData.message);
+
         }
+
+
     };
 
     useEffect(()=> {
@@ -28,6 +36,7 @@ export default function Messages({socket, username, room}) {
             // console.log(data);
             // setMessageList((list) => [...list,data])
             setMessageList((messageList) => [...messageList,data])
+            console.log(data)
         })
         return () => {
             socket.off("receive_message");
