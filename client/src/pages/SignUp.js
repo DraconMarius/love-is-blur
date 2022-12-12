@@ -34,17 +34,18 @@ const SignUp = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+    // console.log(formState);
     try {
-      console.log("flag")
+      console.log("flag");
       const { data } = await createUser({
         variables: { ...formState },
       });
+      console.log(formState);
       // console.log(data.createUser.user)
       // console.log(data.createUser.token)
       Auth.login(data.createUser.token);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       console.error(error);
     }
     // clear form values
