@@ -13,8 +13,10 @@ const resolvers = {
             return User.findById(userId).populate('matches');
         },
 
-        users: async () => {
-            return User.find().populate('matches');
+        users: async (parent, args, context) => {
+            return User.find();
+            // return allButMe = allUser.filter(user => { user._id !== context.user._id });
+            // return allButMe.filter(user => { user.likedBy )
         },
 
         match: async (parent, args) => {

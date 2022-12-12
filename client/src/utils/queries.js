@@ -20,6 +20,19 @@ export const QUERY_ME = gql`
   }
 `;
 
+export const ALL_USER = gql`
+query users{
+  users {
+    _id
+    username
+    firstname
+    bio
+    image
+    likedBy
+  }
+}
+`
+
 export const QUERY_MATCH = gql`
   query match($matchId: ID!) {
     match {
