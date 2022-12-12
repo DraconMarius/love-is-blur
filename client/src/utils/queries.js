@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
       email
       firstname
       bio
+      image
       linkedBy
       matches {
         user1

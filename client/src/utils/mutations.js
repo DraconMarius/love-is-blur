@@ -38,19 +38,19 @@ export const CREATE_MATCH = gql`
   }
 `;
 
-export const FIRST_MSG = gql`
-  mutation firstMessage($matchId: ID!, $messageInput: [messageInput]) {
-    firstMessage(matchId: $matchId, messageInput: $messageInput) {
-      _id
-      messages {
-        _id
-        messageText
-        messageAuthor
-        createdAt
-      }
-    }
-  }
-`;
+// export const FIRST_MSG = gql`
+//   mutation firstMessage($matchId: ID!, $messageInput: [messageInput]) {
+//     firstMessage(matchId: $matchId, messageInput: $messageInput) {
+//       _id
+//       messages {
+//         _id
+//         messageText
+//         messageAuthor
+//         createdAt
+//       }
+//     }
+//   }
+// `;
 
 export const CREATE_MESSAGE = gql`
   mutation createMessage($chatId: ID!, $messageInput: messageInput) {

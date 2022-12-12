@@ -35,6 +35,14 @@ const resolvers = {
             const MatchData = { user1, user2 };
 
             const newMatch = await Match.create(MatchData);
+            const newChat = await Chat.create({});
+            const updateMatch = await Match.findByIdAndUpdate(
+                newMatch._id,
+                { chatId: newChat._id },
+                { new: true }
+            );
+
+            console.log(updateMatch);
 
             //update Both user with the created match
             await User.findByIdAndUpdate(
@@ -48,22 +56,22 @@ const resolvers = {
                 { $addToSet: { matches: newMatch._id } },
                 { new: true }
             );
-            return newMatch;
+            return updateMatch;
         },
 
-        //create Chat with first message, update Match with the newly created chatID
-        firstMessage: async (parent, { matchId, messageInput }) => {
-            const newChat = await Chat.create(messageInput);
-            const updateMatch = await Match.findByIdAndUpdate(
-                matchId,
-                { chatId: newChat._id },
-                { new: true }
-            );
+        // //create Chat with first message, update Match with the newly created chatID
+        // firstMessage: async (parent, { matchId, messageInput }) => {
+        //     const newChat = await Chat.create(messageInput);
+        //     const updateMatch = await Match.findByIdAndUpdate(
+        //         matchId,
+        //         { chatId: newChat._id },
+        //         { new: true }
+        //     );
 
-            console.log(updateMatch);
+        //     console.log(updateMatch);
 
-            return newChat;
-        },
+        //     return newChat;
+        // },
 
         //create message will find the chat by ID, add the newly created message in the array.
         createMessage: async (parent, { chatId, messageInput }) => {
