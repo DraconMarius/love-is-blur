@@ -6,6 +6,9 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      firstname
+      bio
+      linkedBy
       matches {
         user1
         user2
