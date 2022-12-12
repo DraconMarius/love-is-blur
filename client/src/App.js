@@ -20,6 +20,7 @@ import Footer from './components/Footer';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
+  // uri: 'http://localhost:3001/graphql'
 });
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
@@ -43,30 +44,30 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const isLoggedIn = localStorage.getItem('id_token');
+  // const isLoggedIn = localStorage.getItem('id_token');
 
   return (
     <ApolloProvider client={client}>
-      {/* <Router> */}
-      <div>
-        {/* <PageContainer> */}
-        <NavigateTabs />
-        <Routes>
-          {/* <Route 
+      <Router>
+        <div>
+          {/* <PageContainer> */}
+          <NavigateTabs />
+          <Routes>
+            {/* <Route 
           exact path="/" element={isLoggedIn ? (
           ) : (<Navigate replace to="/login" />)} /> */}
 
 
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/chat" element={<Chat />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/swipe" element={<Swipe />} />
-          {/* <Route exact path="/profile" element={<Profile />} /> */}
-        </Routes>
-        {/* </PageContainer> */}
-      </div>
-      {/* </Router> */}
+            <Route exact path="/home" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/chat" element={<Chat />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/swipe" element={<Swipe />} />
+            {/* <Route exact path="/profile" element={<Profile />} /> */}
+          </Routes>
+          {/* </PageContainer> */}
+        </div>
+      </Router>
       <Footer />
     </ApolloProvider>
   );
