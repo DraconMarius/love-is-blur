@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
+import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEnvelope, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Auth from "../utils/auth";
@@ -41,8 +42,15 @@ const Login = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
+    <div
+      className="login-container"
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <div
+        id="login-form"
+        className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop "
+        style={{ textAlign: "center" }}
+      >
         <form onSubmit={handleFormSubmit}>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
@@ -79,7 +87,13 @@ const Login = (props) => {
           </div>
           <div className="field">
             <p className="control">
-              <button className="button is-success">Login</button>
+              <motion.button
+                className="button is-success"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                Login
+              </motion.button>
             </p>
             <p>
               Don't have an account? <Link to="/signup">Signup</Link>
