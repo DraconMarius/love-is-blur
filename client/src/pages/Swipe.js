@@ -1,27 +1,27 @@
-import React, { useState, useMemo, useRef } from 'react';
-import TinderCard from 'react-tinder-card';
-import '../styles/Card.css';
+import React, { useState, useMemo, useRef } from "react";
+import TinderCard from "react-tinder-card";
+import "../styles/Card.css";
 
 const db = [
   {
-    name: 'Richard Hendricks',
-    interest: 'hiking',
+    name: "Richard Hendricks",
+    bio: "hikingwrtgertgwtcrwgt4gcw4rtghxerwthcgertchg3ryhgceryhceryhcehyerycherycherythceryhceryhveryhcryceheryhcryhc",
   },
   {
-    name: 'Erlich Bachman',
-    interest: 'baking',
+    name: "Erlich Bachman",
+    bio: "bakingechyeryhceryhceryhcenbtycnrtyncerycerybcnerycnerychbrycbherythcerychery",
   },
   {
-    name: 'Monica Hall',
-    interest: 'running',
+    name: "Monica Hall",
+    bio: "runningcehyeryhceryhceryhcryhvtyncnrtyxnrtcyncrtycnrtyncrtyncrtynrtynctycn",
   },
   {
-    name: 'Jared Dunn',
-    interest: 'bball',
+    name: "Jared Dunn",
+    bio: "bballcrtyncrtycnrtycndrtxnyrtcyncrthncrtyncrtnctyncrtynctycrtycrtycnty",
   },
   {
-    name: 'Dinesh Chugtai',
-    interest: 'biking',
+    name: "Dinesh Chugtai",
+    bio: "bikingcrtyncrtynctyrncrtyncrtyncrtyrnjvbwelrjgbw;eirvbw;jknw;eorvnwoernv;oernv;orkw;erknvworknvwoirnv;w4rnvwo4inrvwokernvowiernvwoirvn;oweinv;wok4enrv",
   },
 ];
 
@@ -77,7 +77,6 @@ export default function Card() {
         href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
         rel="stylesheet"
       />
-      <h1>Love is Blurr</h1>
 
       <div className="cardContainer">
         {db.map((character, index) => (
@@ -90,6 +89,7 @@ export default function Card() {
           >
             <div className="card">
               <h3>{character.name}</h3>
+              <p>{character.bio}</p>
             </div>
           </TinderCard>
         ))}
@@ -97,15 +97,15 @@ export default function Card() {
 
       <div className="buttons">
         <button
-          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
-          onClick={() => swipe('left')}
+          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          onClick={() => swipe("left")}
         >
           Swipe left!
         </button>
 
         <button
-          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
-          onClick={() => swipe('right')}
+          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          onClick={() => swipe("right")}
         >
           Swipe right!
         </button>
