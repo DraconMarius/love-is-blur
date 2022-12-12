@@ -1,30 +1,39 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const CREATE_USER = gql`
-  mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(username: $username, email: $email, password: $password) {
+  mutation createUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $firstname: String!
+    $bio: String!
+  ) {
+    createUser(
+      username: $username
+      email: $email
+      password: $password
+      firstname: $firstname
+      bio: $bio
+    ) {
       token
       user {
         _id
         username
-        email
       }
     }
   }
 `;
 
-
-
 export const CREATE_MATCH = gql`
-    mutation createMatch($user1: String!, $user2: String!) {
-        createMatch(user1:$user1, user2:$user2){
-            _id
-            user1
-            user2
-            chatId
-            createdAt
-        }
+  mutation createMatch($user1: String!, $user2: String!) {
+    createMatch(user1: $user1, user2: $user2) {
+      _id
+      user1
+      user2
+      chatId
+      createdAt
     }
+  }
 `;
 
 export const FIRST_MSG = gql`
@@ -42,19 +51,17 @@ export const FIRST_MSG = gql`
 `;
 
 export const CREATE_MESSAGE = gql`
-    mutation createMessage($chatId: ID!, $messageInput: messageInput) {
-        createMessage(chatId: $chatId , messageInput: $messageInput){
-            _id
-            messages {
-                _id
-                messageText
-                messageAuthor
-                createdAt        
-            }
-        }
+  mutation createMessage($chatId: ID!, $messageInput: messageInput) {
+    createMessage(chatId: $chatId, messageInput: $messageInput) {
+      _id
+      messages {
+        _id
+        messageText
+        messageAuthor
+        createdAt
+      }
     }
-
-
+  }
 `;
 
 export const UPDATE_USER = gql`
@@ -63,7 +70,7 @@ export const UPDATE_USER = gql`
       _id
       username
       email
-      firstName
+      firstname
       bio
       likedBy
     }
@@ -77,10 +84,6 @@ export const LOGIN = gql`
       user {
         _id
         username
-        email
-        firstName
-        bio
-        likedBy
       }
     }
   }

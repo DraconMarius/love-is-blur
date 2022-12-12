@@ -23,12 +23,12 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async (parent, { username, email, password }) => {
-            const newUser = await User.create({ username, email, password });
+        createUser: async (parent, { username, email, password, firstname, bio }) => {
+            const newUser = await User.create({ username, email, password, firstname, bio });
             //after created User, create JWT
             const token = signToken(newUser);
             //returning object that matches CreateUserResult in typeDefs
-            return { auth: token, user: newUser };
+            return { token, newUser };
         },
 
         createMatch: async (parent, { user1, user2 }) => {
@@ -89,20 +89,24 @@ const resolvers = {
         //login user
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
+            console.log(user);
 
             if (!user) {
                 throw new AuthenticationError(`User with ${email} does not exist`)
             }
 
             const PasswordOK = await user.validatePW(password);
+            console.log(PasswordOK)
 
             if (!PasswordOK) {
                 throw new AuthenticationError(`Error: Incorrect Password`)
             }
 
             const token = signToken(user);
+            console.log(token);
+            console.log(user);
 
-            return (token, user);
+            return ({ token, user });
         }
     },
 };

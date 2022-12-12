@@ -14,7 +14,7 @@ import Auth from "../utils/auth";
 const SignUp = () => {
   const [formState, setFormState] = useState({
     username: "",
-    firstName: "",
+    firstname: "",
     email: "",
     password: "",
     bio: "",
@@ -34,20 +34,24 @@ const SignUp = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+    // console.log(formState);
     try {
+      console.log("flag");
       const { data } = await createUser({
         variables: { ...formState },
       });
-
-      Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
+      console.log(formState);
+      // console.log(data.createUser.user)
+      // console.log(data.createUser.token)
+      Auth.login(data.createUser.token);
+    } catch (error) {
+      console.log(error);
+      console.error(error);
     }
     // clear form values
     setFormState({
       username: "",
-      firstName: "",
+      firstname: "",
       email: "",
       password: "",
       bio: "",
@@ -97,10 +101,10 @@ const SignUp = () => {
             <p className="control has-icons-left has-icons-right">
               <input
                 className="input"
-                type="name"
-                placeholder="name"
-                name="firstName"
-                value={formState.firstName}
+                type="firstname"
+                placeholder="firstname"
+                name="firstname"
+                value={formState.firstname}
                 onChange={handleChange}
               />
               <span className="icon is-small is-left">
