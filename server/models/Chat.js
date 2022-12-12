@@ -8,13 +8,13 @@ const chatSchema = new Schema({
     {
       messageText: {
         type: String,
-        required: true,
+        // required: true,
         minlength: 1,
         maxlength: 280,
       },
       messageAuthor: {
         type: String,
-        required: true,
+        // required: true,
       },
       createdAt: {
         type: Date,
