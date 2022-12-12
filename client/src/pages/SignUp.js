@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../utils/mutations";
@@ -19,6 +19,12 @@ const SignUp = () => {
     password: "",
     bio: "",
   });
+  //getting image url
+  //using useRefs
+  // const [imgURL, setimgURL] = useState("");
+  const imgURL = useRef("");
+
+
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   // update state based on form input changes
@@ -38,9 +44,10 @@ const SignUp = () => {
     try {
       console.log("flag");
       const { data } = await createUser({
-        variables: { ...formState },
+        variables: { ...formState, image: imgURL.current },
       });
       console.log(formState);
+      console.log(imgURL)
       // console.log(data.createUser.user)
       // console.log(data.createUser.token)
       Auth.login(data.createUser.token);
@@ -69,6 +76,10 @@ const SignUp = () => {
     (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
+        // const urlString = result.info.url
+        imgURL.current = result.info.url;
+        console.log(result.info.url)
+        console.log(imgURL.current)
       }
     }
   );

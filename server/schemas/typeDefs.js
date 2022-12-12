@@ -10,6 +10,7 @@ const typeDefs = gql`
     bio: String!
     likedBy: [User]
     matches: [Match]
+    image: String
   }
 
   type Match {
@@ -56,6 +57,7 @@ const typeDefs = gql`
       password: String!
       firstname: String!
       bio: String!
+      image: String
     ): Auth
     login(email:String!, password:String!) : Auth
     createMatch(user1: ID!, user2: ID!, chatId: ID): Match
