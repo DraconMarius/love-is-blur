@@ -45,12 +45,8 @@ io.on("connection", (socket) => {//listen for an event
       socket.to(data.room).emit("receive_message",data)
       console.log(data.author + " " + data.message);
 
-  socket.on("send_message", (data) => {// get the user message in the room
-    //data.room will separete the messages per room
-    socket.to(data.room).emit("receive_message", data)
-    console.log(data);
-
   })
+
 
   socket.on("disconnect", () => { // disconnect a user 
     console.log("User disconnected", socket.id)
