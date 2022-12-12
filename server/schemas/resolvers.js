@@ -89,20 +89,24 @@ const resolvers = {
         //login user
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
+            console.log(user);
 
             if (!user) {
                 throw new AuthenticationError(`User with ${email} does not exist`)
             }
 
             const PasswordOK = await user.validatePW(password);
+            console.log(PasswordOK)
 
             if (!PasswordOK) {
                 throw new AuthenticationError(`Error: Incorrect Password`)
             }
 
             const token = signToken(user);
+            console.log(token);
+            console.log(user);
 
-            return (token, user);
+            return ({ token, user });
         }
     },
 };
