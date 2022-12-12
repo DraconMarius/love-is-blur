@@ -42,7 +42,7 @@ io.on("connection", (socket) => {//listen for an event
   socket.on("send_message", (data) =>{// get the user message in the room
       //data.room will separete the messages per room
       socket.to(data.room).emit("receive_message",data)
-      // console.log(data);
+      console.log(data);
 
   })
 
