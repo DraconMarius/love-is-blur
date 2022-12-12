@@ -23,8 +23,8 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async (parent, { username, email, password, firstname, bio }) => {
-            const newUser = await User.create({ username, email, password, firstname, bio });
+        createUser: async (parent, { username, email, password, firstname, bio, image }) => {
+            const newUser = await User.create({ username, email, password, firstname, bio, image });
             //after created User, create JWT
             const token = signToken(newUser);
             //returning object that matches CreateUserResult in typeDefs
