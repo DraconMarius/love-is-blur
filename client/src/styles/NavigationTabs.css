@@ -15,6 +15,11 @@
   font-size: 20px;
   font-weight: 800;
 }
+.logout {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
 
 .navbar-start {
   display: flex;
