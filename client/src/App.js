@@ -16,6 +16,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import NavigateTabs from "./components/NavigationTabs";
 import Footer from "./components/Footer";
+import Match from "./pages/Match"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -61,7 +62,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/swipe" element={<Card />} />
+            <Route exact path="/swipe" element={<Match />} />
             {/* <Route exact path="/profile" element={<Profile />} /> */}
           </Routes>
           {/* </PageContainer> */}

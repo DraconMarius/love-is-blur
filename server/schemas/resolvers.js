@@ -14,7 +14,8 @@ const resolvers = {
         },
 
         users: async (parent, args, context) => {
-            return User.find();
+            console.log("serverside action")
+            return User.find().populate('likedBy');
             // return allButMe = allUser.filter(user => { user._id !== context.user._id });
             // return allButMe.filter(user => { user.likedBy )
         },
