@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import '../styles/NavigationTabs.css';
-import { useState } from 'react';
-import Auth from '../utils/auth';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import "../styles/NavigationTabs.css";
+import { useState } from "react";
+import Auth from "../utils/auth";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 function NavigationTabs() {
@@ -18,7 +18,7 @@ function NavigationTabs() {
                 setisActive(!isActive);
               }}
               role="button"
-              className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
+              className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarBasicExample"
@@ -32,7 +32,7 @@ function NavigationTabs() {
 
           <div
             id="navbarBasicExample"
-            className={`navbar-menu ${isActive ? 'is-active' : ''}`}
+            className={`navbar-menu ${isActive ? "is-active" : ""}`}
           >
             <div className="navbar-start">
               <motion.div
@@ -55,7 +55,7 @@ function NavigationTabs() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Link to="/profile">profile</Link>
+                <Link to="/profile"> edit profile</Link>
               </motion.div>
 
               <motion.div
@@ -91,7 +91,7 @@ function NavigationTabs() {
                 setisActive(!isActive);
               }}
               role="button"
-              className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
+              className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarBasicExample"
@@ -105,7 +105,7 @@ function NavigationTabs() {
 
           <div
             id="navbarBasicExample"
-            className={`navbar-menu ${isActive ? 'is-active' : ''}`}
+            className={`navbar-menu ${isActive ? "is-active" : ""}`}
           >
             <div className="navbar-start">
               <motion.div

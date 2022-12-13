@@ -79,6 +79,36 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const EDIT_USER = gql`
+  mutation editUser(
+    $userId: ID!
+    $username: String!
+    $firstname: String!
+    $email: String!
+    $bio: String!
+    $image: String
+  ) {
+    editUser(
+      userId: $userId
+      username: $username
+      firstname: $firstname
+      email: $email
+      bio: $bio
+      image: $image
+    ) {
+      token
+      user {
+        _id
+        username
+        email
+        firstname
+        bio
+        image
+      }
+    }
+  }
+`;
+
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
