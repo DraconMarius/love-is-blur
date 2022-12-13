@@ -1,81 +1,81 @@
 [
   {
-    "username": "Bryan01",
-    "email": "bkernighan@techfriends.com",
+    "username": "Luiz",
+    "email": "luiz@gmail.com",
     "password": "password01",
-    "firstName": "Bryan",
+    "firstname": "Luiz",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/04/male-profile-picture-vector-2041304.webp",
     "bio": "I enjoy gaming and cats."
   },
   {
-    "username": "Max02",
-    "email": "max02@email.com",
-    "password": "password02",
-    "firstName": "Max",
+    "username": "Mari",
+    "email": "mari@gmail.com",
+    "password": "password01",
+    "firstname": "Mari",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/04/male-profile-picture-vector-2041304.webp",
     "bio": "Catch me at the beach or on a board!"
   },
   {
-    "username": "John03",
-    "email": "john03@email.com",
-    "password": "password03",
-    "firstName": "John",
+    "username": "jacob",
+    "email": "jacob@gmail.com",
+    "password": "password01",
+    "firstname": "Jacob",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/04/male-profile-picture-vector-2041304.webp",
     "bio": "I like food, beer and sports!"
   },
   {
-    "username": "Sally04",
-    "email": "sally@email.com",
-    "password": "password04",
-    "firstName": "Sally",
+    "username": "Chris",
+    "email": "chris@gmail.com",
+    "password": "password01",
+    "firstname": "Chris",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/02/female-profile-picture-vector-2041302.webp",
     "bio": "Like romantic comedies and goofy people!"
   },
   {
     "username": "Edward05",
     "email": "edward05@email.com",
-    "password": "password05",
-    "firstName": "Edward",
+    "password": "password01",
+    "firstname": "Edward",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/04/male-profile-picture-vector-2041304.webp",
     "bio": "Enjoy live music and art."
   },
   {
     "username": "Alan06",
     "email": "alan06@email.com",
-    "password": "password06",
-    "firstName": "Alan",
+    "password": "password01",
+    "firstname": "Alan",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/04/male-profile-picture-vector-2041304.webp",
     "bio": "I like to hike and camp."
   },
   {
     "username": "Michelle07",
     "email": "michelle07@email.com",
-    "password": "password07",
-    "firstName": "Michelle",
+    "password": "password01",
+    "firstname": "Michelle",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/02/female-profile-picture-vector-2041302.webp",
     "bio": "I enjoy surfing and skateboarding!"
   },
   {
     "username": "Stephanie08",
     "email": "stephanie08@email.com",
-    "password": "password08",
-    "firstName": "Stephanie",
+    "password": "password01",
+    "firstname": "Stephanie",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/02/female-profile-picture-vector-2041302.webp",
     "bio": "I like to suntan at the beach."
   },
   {
     "username": "Jennifer09",
     "email": "jennifer09@email.com",
-    "password": "password09",
-    "firstName": "Jennifer",
+    "password": "password01",
+    "firstname": "Jennifer",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/02/female-profile-picture-vector-2041302.webp",
     "bio": "Like spending time reading books and expanding my horizons!"
   },
   {
     "username": "Candice10",
     "email": "candice10@email.com",
-    "password": "password10",
-    "firstName": "Candice",
+    "password": "password01",
+    "firstname": "Candice",
     "image": "https://cdn.vectorstock.com/i/1000x1000/13/02/female-profile-picture-vector-2041302.webp",
     "bio": "Take me to Paris!"
   }
