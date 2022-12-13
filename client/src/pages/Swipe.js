@@ -1,38 +1,19 @@
 import React, { useState, useMemo, useRef } from "react";
+import { Link } from "react-router-dom";
 import TinderCard from "react-tinder-card";
 import "../styles/Card.css";
 import { useQuery, useMutation } from "@apollo/client";
-import { UPDATE_USER } from '../utils/mutations';
+import { UPDATE_USER, CREATE_MATCH } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-// const db = [
-//   {
-//     name: "Richard Hendricks",
-//     bio: "hikingwrtgertgwtcrwgt4gcw4rtghxerwthcgertchg3ryhgceryhceryhcehyerycherycherythceryhceryhveryhcryceheryhcryhc",
-//   },
-//   {
-//     name: "Erlich Bachman",
-//     bio: "bakingechyeryhceryhceryhcenbtycnrtyncerycerybcnerycnerychbrycbherythcerychery",
-//   },
-//   {
-//     name: "Monica Hall",
-//     bio: "runningcehyeryhceryhceryhcryhvtyncnrtyxnrtcyncrtycnrtyncrtyncrtynrtynctycn",
-//   },
-//   {
-//     name: "Jared Dunn",
-//     bio: "bballcrtyncrtycnrtycndrtxnyrtcyncrthncrtyncrtnctyncrtynctycrtycrtycnty",
-//   },
-//   {
-//     name: "Dinesh Chugtai",
-//     bio: "bikingcrtyncrtynctyrncrtyncrtyncrtyrnjvbwelrjgbw;eirvbw;jknw;eorvnwoernv;oernv;orkw;erknvworknvwoirnv;w4rnvwo4inrvwokernvowiernvwoirvn;oweinv;wok4enrv",
-//   },
-// ];
+
 
 //**now passing db info from wrapper Match. App.js will display match, load
 //the db data before loading the swipe.js
 
 export default function Card({ rawdb }) {
-  const [updateUser, { error, data }] = useMutation(UPDATE_USER);
+  const [updateUser, { error1, data1 }] = useMutation(UPDATE_USER);
+  const [createMatch, { error2, data2 }] = useMutation(CREATE_MATCH);
 
 
   //get user profile
@@ -40,35 +21,25 @@ export default function Card({ rawdb }) {
   console.log(loggedInUser);
   console.log(rawdb);
 
+  //getting our own data
+  const me = rawdb.filter(user => user._id == loggedInUser.data._id);
+  console.log(me[0].likedBy);
+
   // filter all user that is not our current user (working)
   const filteredDB = rawdb.filter(user => user._id !== loggedInUser.data._id);
 
   console.log(filteredDB);
-
-  //smae line of code as above but changed name to db to connec to card render
-  // const db = rawdb.filter(user => user._id !== loggedInUser.data._id);
-  // console.log(db)
-
+  //filtering all users that we did not liked YET
   const db = filteredDB.filter(user => !user.likedBy.includes(loggedInUser.data._id));
 
   console.log(db);
 
 
-  //below code is not actually filtering users that we already liked
-  // filter all users that is not already liked by us
-  // const db = filteredDB.filter(user => {
-  //   const r = user.likedBy.every((likedByUserId) => likedByUserId !== loggedInUser.data._id);
-
-  //   return r
-  // });
-
-
-
-
-
-
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState();
+  // const [matched, setMatched] = useState(false);
+  // console.log(matched)
+  const isMatched = useRef(false);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
@@ -112,7 +83,18 @@ export default function Card({ rawdb }) {
         const { data } = await updateUser({
           variables: { userId: ID, likedBy: loggedInUser.data._id }
         })
-        console.log(data);
+        if (me[0].likedBy.includes(ID)) {
+          console.log(me[0]._id)
+          console.log(ID)
+          const { data } = await createMatch({
+            variables: { user1: me[0]._id, user2: ID }
+          })
+          console.log(data);
+          if (data) {
+            isMatched.current = true
+            console.log(isMatched.current);
+          }
+        }
       }
     }
   };
@@ -127,7 +109,20 @@ export default function Card({ rawdb }) {
         href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
         rel="stylesheet"
       />
-
+      {(isMatched.current === true) ? <div id="modal" className="modal is-active">
+        <div className="modal-background"></div>
+        <div className="modal-card">
+          <header className="modal-card-head custom-modal-header"></header>
+          <section className="modal-card-body custom-modal-body">
+            <p>YOU GOT A MATCH</p>
+            <div className="level-right">
+              <Link to="/chat">
+                <button id="ExpOKBtn" className="button ok-btn custom-btn">OK</button>
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div> : <></>}
       <div className="cardContainer">
         {db.map((character, index) => (
           <TinderCard

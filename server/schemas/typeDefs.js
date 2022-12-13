@@ -60,7 +60,7 @@ const typeDefs = gql`
       image: String
     ): Auth
     login(email: String!, password: String!): Auth
-    createMatch(user1: ID!, user2: ID!, chatId: ID): Match
+    createMatch(user1: ID!, user2: ID!): Match
     createMessage(chatId: ID!, messageInput: messageInput): Chat
     updateUser(userId: ID!, likedBy: ID!): User
     editUser(
