@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import ProfileContainer from './pages/ProfileContainer';
 import NavigateTabs from './components/NavigationTabs';
 import Footer from './components/Footer';
 import Match from './pages/Match';
@@ -63,7 +64,7 @@ function App() {
             <Route exact path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/swipe" element={<Match />} />
-            {/* <Route exact path="/profile" element={<Profile />} /> */}
+            <Route exact path="/profile" element={<ProfileContainer />} />
           </Routes>
           {/* </PageContainer> */}
         </div>
