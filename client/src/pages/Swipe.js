@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useRef } from "react";
 import TinderCard from "react-tinder-card";
 import "../styles/Card.css";
-import { useQuery } from "@apollo/client";
-import { ALL_USER } from '../utils/queries';
+import { useQuery, useMutation } from "@apollo/client";
+import { UPDATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 // const db = [
@@ -32,17 +32,26 @@ import Auth from '../utils/auth';
 //the db data before loading the swipe.js
 
 export default function Card({ rawdb }) {
+  const [updateUser, { error, data }] = useMutation(UPDATE_USER);
+
+
   //get user profile
   const loggedInUser = Auth.getProfile();
   console.log(loggedInUser);
   console.log(rawdb);
 
   // filter all user that is not our current user (working)
-  // const filteredDB = rawdb.filter(user => user._id !== loggedInUser.data._id);
+  const filteredDB = rawdb.filter(user => user._id !== loggedInUser.data._id);
+
+  console.log(filteredDB);
 
   //smae line of code as above but changed name to db to connec to card render
-  const db = rawdb.filter(user => user._id !== loggedInUser.data._id);
-  console.log(db)
+  // const db = rawdb.filter(user => user._id !== loggedInUser.data._id);
+  // console.log(db)
+
+  const db = filteredDB.filter(user => !user.likedBy.includes(loggedInUser.data._id));
+
+  console.log(db);
 
 
   //below code is not actually filtering users that we already liked
@@ -93,9 +102,18 @@ export default function Card({ rawdb }) {
     // during latest swipes. Only the last outOfFrame event should be considered valid
   };
 
-  const swipe = async (dir) => {
+  const swipe = async (dir, ID) => {
     if (canSwipe && currentIndex < db.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+      console.log(dir);
+      if (dir === "right") {
+        console.log("ID: ", ID)
+        console.log("LoggedIn ID: ", loggedInUser.data._id)
+        const { data } = await updateUser({
+          variables: { userId: ID, likedBy: loggedInUser.data._id }
+        })
+        console.log(data);
+      }
     }
   };
 
@@ -122,26 +140,26 @@ export default function Card({ rawdb }) {
             <div className="card">
               <h3>{character.firstname}</h3>
               <p>{character.bio}</p>
+              <div className="buttons">
+                <button
+                  style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                  onClick={() => swipe("left")}
+                >
+                  Swipe left!
+                </button>
+
+                <button
+                  style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                  onClick={() => swipe("right", character._id)}
+                >
+                  Swipe right!
+                </button>
+              </div>
             </div>
           </TinderCard>
         ))}
       </div>
 
-      <div className="buttons">
-        <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("left")}
-        >
-          Swipe left!
-        </button>
-
-        <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-          onClick={() => swipe("right")}
-        >
-          Swipe right!
-        </button>
-      </div>
       {lastDirection ? (
         <h2 key={lastDirection} className="infoText">
           You swiped {lastDirection}
