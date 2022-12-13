@@ -8,7 +8,7 @@ const typeDefs = gql`
     password: String!
     firstname: String!
     bio: String!
-    likedBy: [User]
+    likedBy: [String]
     matches: [Match]
     image: String
   }

@@ -3,6 +3,7 @@ import TinderCard from "react-tinder-card";
 import "../styles/Card.css";
 import { useQuery } from "@apollo/client";
 import { ALL_USER } from '../utils/queries';
+import Auth from '../utils/auth';
 
 // const db = [
 //   {
@@ -30,7 +31,33 @@ import { ALL_USER } from '../utils/queries';
 //**now passing db info from wrapper Match. App.js will display match, load
 //the db data before loading the swipe.js
 
-export default function Card({ db }) {
+export default function Card({ rawdb }) {
+  //get user profile
+  const loggedInUser = Auth.getProfile();
+  console.log(loggedInUser);
+  console.log(rawdb);
+
+  // filter all user that is not our current user (working)
+  // const filteredDB = rawdb.filter(user => user._id !== loggedInUser.data._id);
+
+  //smae line of code as above but changed name to db to connec to card render
+  const db = rawdb.filter(user => user._id !== loggedInUser.data._id);
+  console.log(db)
+
+
+  //below code is not actually filtering users that we already liked
+  // filter all users that is not already liked by us
+  // const db = filteredDB.filter(user => {
+  //   const r = user.likedBy.every((likedByUserId) => likedByUserId !== loggedInUser.data._id);
+
+  //   return r
+  // });
+
+
+
+
+
+
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
