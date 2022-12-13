@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations";
+import auth from '../utils/auth';
 
 
 export default function Messages({ socket, username, room }) {
     const [currentMessage, setCurrentMessage] = useState("");
     // display the chat to the user
     const [messageList, setMessageList] = useState([]);
+
+    const userProfile = auth.getProfile()
+    console.log(userProfile)
 
     const [createMessage, { error, data }] = useMutation(CREATE_MESSAGE)
 
@@ -86,6 +90,7 @@ export default function Messages({ socket, username, room }) {
                     onKeyDown={(event) => {// added Enter key to be listen
                         event.key === "Enter" && sendMessage();
                     }}
+                    value={currentMessage}
                 />
                 <button onClick={sendMessage}>Send</button>
             </div>

@@ -78,10 +78,12 @@ const resolvers = {
 
         //create message will find the chat by ID, add the newly created message in the array.
         createMessage: async (parent, { chatId, messageInput }) => {
+
+            
             const updateChat = await Chat.findByIdAndUpdate(
                 chatId,
                 { $push: { messages: messageInput } },
-                { new: true }
+                { new: true, upsert: true }
             );
 
             return updateChat;
