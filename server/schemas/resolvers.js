@@ -6,7 +6,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      return User.findById(context.user._id).populate("matches");
+      return User.findById(context.user._id);
     },
 
     user: async (parent, { userId }) => {
@@ -45,9 +45,9 @@ const resolvers = {
     },
 
     createMatch: async (parent, { user1, user2 }) => {
-      const MatchData = { user1, user2 };
-
-      const newMatch = await Match.create(MatchData);
+      console.log("match creation?")
+      console.log(user1);
+      const newMatch = await Match.create({ user1, user2 });
       const newChat = await Chat.create({});
       const updateMatch = await Match.findByIdAndUpdate(
         newMatch._id,

@@ -27,12 +27,11 @@ export const CREATE_USER = gql`
 `;
 
 export const CREATE_MATCH = gql`
-  mutation createMatch($user1: String!, $user2: String!) {
+  mutation createMatch($user1: ID!, $user2: ID!) {
     createMatch(user1: $user1, user2: $user2) {
       _id
       user1
       user2
-      chatId
       createdAt
     }
   }
