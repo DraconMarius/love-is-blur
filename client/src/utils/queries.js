@@ -9,26 +9,19 @@ export const QUERY_ME = gql`
       firstname
       bio
       image
-      likedBy
-      matches {
-        user1
-        user2
-        chatId
-        createdAt
-      }
     }
   }
 `;
 
 export const ALL_USER = gql`
-  query{
+  query {
     users {
-    _id
-    firstname
-    bio
+      _id
+      firstname
+      bio
+    }
   }
-}
-`
+`;
 
 export const QUERY_MATCH = gql`
   query match($matchId: ID!) {
