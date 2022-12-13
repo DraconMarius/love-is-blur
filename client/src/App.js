@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
   createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import Chat from "./pages/Chat";
-import Card from "./pages/Swipe";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import NavigateTabs from "./components/NavigationTabs";
-import Footer from "./components/Footer";
-import Match from "./pages/Match"
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Chat from './pages/Chat';
+import Card from './pages/Swipe';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import NavigateTabs from './components/NavigationTabs';
+import Footer from './components/Footer';
+import Match from './pages/Match';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -26,14 +26,14 @@ const httpLink = createHttpLink({
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("id_token");
+  const token = localStorage.getItem('id_token');
   // return the headers to the context so httpLink can read them
   // We then use the setContext() method to retrieve an existing token from local storage and attach the JWT token to every request sent from the client.
   // The back end will then use this information to verify the request:
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
@@ -58,7 +58,7 @@ function App() {
           exact path="/" element={isLoggedIn ? (
           ) : (<Navigate replace to="/login" />)} /> */}
 
-            <Route exact path="/home" element={<Home />} />
+            <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/chat" element={<Chat />} />
             <Route exact path="/signup" element={<SignUp />} />
