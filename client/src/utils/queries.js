@@ -9,7 +9,7 @@ export const QUERY_ME = gql`
       firstname
       bio
       image
-      linkedBy
+      likedBy
       matches {
         user1
         user2
@@ -21,14 +21,11 @@ export const QUERY_ME = gql`
 `;
 
 export const ALL_USER = gql`
-query users{
-  users {
+  query{
+    users {
     _id
-    username
     firstname
     bio
-    image
-    likedBy
   }
 }
 `

@@ -4,41 +4,37 @@ import "../styles/Card.css";
 import { useQuery } from "@apollo/client";
 import { ALL_USER } from '../utils/queries';
 
-const db = [
-  {
-    name: "Richard Hendricks",
-    bio: "hikingwrtgertgwtcrwgt4gcw4rtghxerwthcgertchg3ryhgceryhceryhcehyerycherycherythceryhceryhveryhcryceheryhcryhc",
-  },
-  {
-    name: "Erlich Bachman",
-    bio: "bakingechyeryhceryhceryhcenbtycnrtyncerycerybcnerycnerychbrycbherythcerychery",
-  },
-  {
-    name: "Monica Hall",
-    bio: "runningcehyeryhceryhceryhcryhvtyncnrtyxnrtcyncrtycnrtyncrtyncrtynrtynctycn",
-  },
-  {
-    name: "Jared Dunn",
-    bio: "bballcrtyncrtycnrtycndrtxnyrtcyncrthncrtyncrtnctyncrtynctycrtycrtycnty",
-  },
-  {
-    name: "Dinesh Chugtai",
-    bio: "bikingcrtyncrtynctyrncrtyncrtyncrtyrnjvbwelrjgbw;eirvbw;jknw;eorvnwoernv;oernv;orkw;erknvworknvwoirnv;w4rnvwo4inrvwokernvowiernvwoirvn;oweinv;wok4enrv",
-  },
-];
+// const db = [
+//   {
+//     name: "Richard Hendricks",
+//     bio: "hikingwrtgertgwtcrwgt4gcw4rtghxerwthcgertchg3ryhgceryhceryhcehyerycherycherythceryhceryhveryhcryceheryhcryhc",
+//   },
+//   {
+//     name: "Erlich Bachman",
+//     bio: "bakingechyeryhceryhceryhcenbtycnrtyncerycerybcnerycnerychbrycbherythcerychery",
+//   },
+//   {
+//     name: "Monica Hall",
+//     bio: "runningcehyeryhceryhceryhcryhvtyncnrtyxnrtcyncrtycnrtyncrtyncrtynrtynctycn",
+//   },
+//   {
+//     name: "Jared Dunn",
+//     bio: "bballcrtyncrtycnrtycndrtxnyrtcyncrthncrtyncrtnctyncrtynctycrtycrtycnty",
+//   },
+//   {
+//     name: "Dinesh Chugtai",
+//     bio: "bikingcrtyncrtynctyrncrtyncrtyncrtyrnjvbwelrjgbw;eirvbw;jknw;eorvnwoernv;oernv;orkw;erknvworknvwoirnv;w4rnvwo4inrvwokernvowiernvwoirvn;oweinv;wok4enrv",
+//   },
+// ];
 
+//**now passing db info from wrapper Match. App.js will display match, load
+//the db data before loading the swipe.js
 
-
-export default function Card() {
+export default function Card({ db }) {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1);
   const [lastDirection, setLastDirection] = useState();
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
-
-  const { loading, error, data } = useQuery(ALL_USER);
-  const users = data?.users || [];
-
-  // console.log(data) //undefined
 
   const childRefs = useMemo(
     () =>
@@ -78,7 +74,6 @@ export default function Card() {
 
   return (
     <div className="mainComponent">
-      {loading ? (<div>loading</div>) : (console.log(users))}
       <link
         href="https://fonts.googleapis.com/css?family=Damion&display=swap"
         rel="stylesheet"
@@ -93,12 +88,12 @@ export default function Card() {
           <TinderCard
             ref={childRefs[index]}
             className="swipe"
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
+            key={character.firstname}
+            onSwipe={(dir) => swiped(dir, character.firstname, index)}
+            onCardLeftScreen={() => outOfFrame(character.firstname, index)}
           >
             <div className="card">
-              <h3>{character.name}</h3>
+              <h3>{character.firstname}</h3>
               <p>{character.bio}</p>
             </div>
           </TinderCard>
