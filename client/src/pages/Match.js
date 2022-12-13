@@ -6,7 +6,7 @@ import Card from './Swipe'
 
 export default function Match() {
     const { loading, error, data } = useQuery(ALL_USER);
-    const db = data?.users || [];
+    const rawdb = data?.users || [];
 
 
     //wrapping our swipable card:
@@ -19,7 +19,7 @@ export default function Match() {
     return (
         <>
             {loading ? (<div>Loading...</div>)
-                : (<Card db={db} />)}
+                : (<Card rawdb={rawdb} />)}
         </>
     )
 

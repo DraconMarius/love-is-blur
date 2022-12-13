@@ -32,12 +32,9 @@ const userSchema = new Schema({
         type: String,
         require: true,
     },
-    likedBy: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-    ],
+    likedBy: [{
+        type: String
+    }],
     matches: [
         {
             type: Schema.Types.ObjectId,

@@ -19,6 +19,7 @@ export const ALL_USER = gql`
       _id
       firstname
       bio
+      likedBy
     }
   }
 `;
@@ -31,6 +32,27 @@ export const QUERY_MATCH = gql`
       user2
       chatId
       createdAt
+    }
+  }
+`;
+
+
+export const GET_USER = gql`
+  query user($userId: ID!) {
+    user {
+      _id
+      username
+      email
+      firstname
+      bio
+      image
+      likedBy
+      matches {
+        user1
+        user2
+        chatId
+        createdAt
+      }
     }
   }
 `;
