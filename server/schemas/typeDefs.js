@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -59,12 +59,20 @@ const typeDefs = gql`
       bio: String!
       image: String
     ): Auth
-    login(email:String!, password:String!) : Auth
+    login(email: String!, password: String!): Auth
     createMatch(user1: ID!, user2: ID!, chatId: ID): Match
     createMessage(chatId: ID!, messageInput: messageInput): Chat
     updateUser(userId: ID!, likedBy: ID!): User
+    editUser(
+      userId: ID!
+      bio: String
+      image: String
+      firstname: String
+      username: String
+      email: String
+    ): Auth
   }
-  `;
+`;
 
 // firstMessage(matchId: ID!, messages: [messageInput]): Chat
 module.exports = typeDefs;

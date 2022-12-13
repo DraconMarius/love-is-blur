@@ -1,32 +1,25 @@
 // Page to customize your profile/personal information
-import React, { useState, formState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { motion } from 'framer-motion';
-import { QUERY_ME } from '../utils/queries';
-import { UPDATE_USER } from '../utils/mutations';
+import React, { useState, formState, useRef } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { motion } from "framer-motion";
+import { EDIT_USER } from "../utils/mutations";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLock,
-  faEnvelope,
-  faCheck,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
-import '../styles/profile.css';
+import "../styles/profile.css";
 
 function Profile({ user }) {
   const [formState, setFormState] = useState({
-    username: '',
-    firstname: '',
-    email: '',
-    password: '',
-    bio: '',
+    username: user.username,
+    firstname: user.firstname,
+    email: user.email,
+    bio: user.bio,
   });
+
   console.log(user);
   //const { update } = useMutation(UPDATE_USER);
-
+  const imgURL = useRef("");
+  const [editUser, { error, data }] = useMutation(EDIT_USER);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,28 +32,56 @@ function Profile({ user }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
     // console.log(formState);
     try {
-      console.log('flag');
-      //   const { data } = await createUser({
-      //     variables: { ...formState, image: imgURL.current },
-      //   });
-      console.log(formState);
+      console.log("flag");
 
+      const { data } = await editUser({
+        variables: { ...formState, userId: user._id, image: imgURL.current },
+      });
+      console.log(data);
+      console.log("flag");
+      console.log(formState);
+      console.log(imgURL);
       // console.log(data.createUser.user)
       // console.log(data.createUser.token)
+      Auth.login(data.editUser.token);
     } catch (error) {
       console.log(error);
       console.error(error);
     }
     // clear form values
     setFormState({
-      username: '',
-      firstname: '',
-      email: '',
-      password: '',
-      bio: '',
+      username: "",
+      firstname: "",
+      email: "",
+      bio: "",
     });
+  };
+  const cloudName = "dp9s1u3uv";
+  const uploadPreset = "ml_default";
+  const myWidget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
+      cropping: true,
+      multiple: false,
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+        // const urlString = result.info.url
+        imgURL.current = result.info.url;
+        console.log(result.info.url);
+        console.log(imgURL.current);
+      }
+    }
+  );
+
+  const openWidget = (myWidget) => {
+    // event.preventDefault();
+    myWidget.open();
   };
 
   //   const [formState, setFormState] = useState({
@@ -68,81 +89,67 @@ function Profile({ user }) {
   //   })
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
+        <figure
+          style={{
+            margin: "auto",
+          }}
+          className="image is-128x128"
+        >
+          <img className="is-rounded" src={user.image} alt={user.firstname} />
+        </figure>
         <form onSubmit={handleFormSubmit}>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
+              <span>Username:</span>
               <input
                 className="input"
                 type="text"
-                placeholder={user.username}
                 name="username"
-                value=""
+                value={formState.username}
+                // defaultValue={user.username}
                 onChange={handleChange}
               />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faUser} />
-              </span>
             </p>
           </div>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
+              <span>Firstname:</span>
               <input
                 className="input"
                 type="firstname"
-                placeholder="firstname"
                 name="firstname"
-                value={user.firstname}
+                value={formState.firstname}
+                // defaultValue={user.firstname}
                 onChange={handleChange}
               />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faUser} />
-              </span>
             </p>
           </div>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
+              <span>Email:</span>
               <input
                 className="input"
                 type="email"
-                placeholder="Email"
                 name="email"
-                value={user.email}
+                value={formState.email}
+                // defaultValue={user.email}
                 onChange={handleChange}
               />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faEnvelope} />
-              </span>
-              <span className="icon is-small is-right">
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
             </p>
           </div>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input
-                className="input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={user.password}
-                onChange={handleChange}
-              />
-              <span className="icon is-small is-left">
-                <FontAwesomeIcon icon={faLock} />
-              </span>
-            </p>
-          </div>
+
           <div className="field is-horizontal">
             <div className="field-body">
               <div className="field ">
                 <div className="control">
+                  <span>Bio:</span>
                   <textarea
                     name="bio"
                     className="textarea "
-                    placeholder="Enter a short bio"
-                    value={user.bio}
+                    value={formState.bio}
+                    // defaultValue={user.bio}
                     onChange={handleChange}
                   ></textarea>
                 </div>
@@ -156,16 +163,17 @@ function Profile({ user }) {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                signup
+                Save edits
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 id="upload-widget-button"
                 className="button is-success"
+                onClick={() => openWidget(myWidget)}
                 type="button"
               >
-                upload Photo
+                Upload New Photo
               </motion.button>
             </p>
           </div>
