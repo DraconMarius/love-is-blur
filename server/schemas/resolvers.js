@@ -104,7 +104,7 @@ const resolvers = {
       const updateChat = await Chat.findByIdAndUpdate(
         chatId,
         { $push: { messages: messageInput } },
-        { new: true }
+        { new: true, upsert: true }
       );
 
       return updateChat;

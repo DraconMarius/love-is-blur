@@ -5,7 +5,7 @@ const { authMiddleware } = require('./utils/auth');
 
 const http = require("http"); // required to build the server with socket.io
 const cors = require("cors"); // socket.io deal with some of the socket.io issue
-const { Server } = require("socket.io")// It will handle the messages to send and receive + the socket id 
+const socketio = require("socket.io")// It will handle the messages to send and receive + the socket id 
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -22,40 +22,40 @@ const server = new ApolloServer({
 /*################# Created by Luiz ######################*/
 app.use(cors());
 
-const serverSocket = http.createServer(app);
+// const serverSocket = http.createServer(app);
 
-const io = new Server(serverSocket, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  }
-});
+// const io = new Server(serverSocket, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   }
+// });
 
-io.on("connection", (socket) => {//listen for an event
-  console.log(`User connected: ${socket.id}`);
-  //socket.on listen to the events
-  socket.on("join_room", (data) => {// to join a room
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} join room: ${data}`);
-  })
-
-
-  socket.on("send_message", (data) =>{// get the user message in the room
-      //data.room will separete the messages per room
-      socket.to(data.room).emit("receive_message",data)
-      console.log(data.author + " " + data.message);
-
-  })
+// io.on("connection", (socket) => {//listen for an event
+//   console.log(`User connected: ${socket.id}`);
+//   //socket.on listen to the events
+//   socket.on("join_room", (data) => {// to join a room
+//     socket.join(data);
+//     console.log(`User with ID: ${socket.id} join room: ${data}`);
+//   })
 
 
-  socket.on("disconnect", () => { // disconnect a user 
-    console.log("User disconnected", socket.id)
-  })
-});
+//   socket.on("send_message", (data) =>{// get the user message in the room
+//       //data.room will separete the messages per room
+//       socket.to(data.room).emit("receive_message",data)
+//       console.log(data.author + " " + data.message);
 
-serverSocket.listen(3002, () => {
-  console.log("Server running")
-});
+//   })
+
+
+//   socket.on("disconnect", () => { // disconnect a user 
+//     console.log("User disconnected", socket.id)
+//   })
+// });
+
+// serverSocket.listen(3002, () => {
+//   console.log("Server running")
+// });
 
 /*############# Created by Luiz ###################*/
 
@@ -76,12 +76,38 @@ const startApolloServer = async (typeDefs, resolvers) => {
   server.applyMiddleware({ app });
 
   db.once('open', () => {
-    app.listen(PORT, () => {
+    const httpServer = app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(
         `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
+
+    //attaching our app with socket.io by luiz
+    const io = socketio(httpServer)
+
+    io.on("connection", (socket) => {//listen for an event
+      console.log(`User connected: ${socket.id}`);
+      //socket.on listen to the events
+      socket.on("join_room", (data) => {// to join a room
+        socket.join(data);
+        console.log(`User with ID: ${socket.id} join room: ${data}`);
+      })
+
+
+      socket.on("send_message", (data) => {// get the user message in the room
+        //data.room will separete the messages per room
+        socket.to(data.room).emit("receive_message", data)
+        console.log(data.author + " " + data.message);
+
+      })
+
+
+      socket.on("disconnect", () => { // disconnect a user 
+        console.log("User disconnected", socket.id)
+      })
+    });
+
   });
 };
 

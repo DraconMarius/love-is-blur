@@ -23,11 +23,12 @@ import { QUERY_MATCH } from '../utils/queries';
 import "../styles/chat.css";
 
 
-const socket = io.connect("http://localhost:3002");
+const socket = io();
+
 
 function Chat({ users, matches }) {
-  // const [username, setUsername] = useState("");
-  // const [room, setRoom] = useState("");
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
 
   console.log(users);
@@ -67,24 +68,24 @@ function Chat({ users, matches }) {
   // setUsername(userProfile.data.firstname)
 
 
-  // const joinRoom = () => {
-  //   if (username !== "" & room !== "") {
-  //     socket.emit("join_room", room);
-  //     setShowChat(true);
-  //     console.log(socket.id)
-  //   }
-  // }
+  const joinRoom = () => {
+    if (username !== "" & room !== "") {
+      socket.emit("join_room", room);
+      setShowChat(true);
+      console.log(socket.id)
+    }
+  }
 
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw" }}>
+      {/* <div style={{ height: "100vh", width: "100vw" }}>
         <Grid container component={Paper}>
           <Grid item={true} xs={3}>
             <Grid item={true} xs={12} style={{ padding: "10px" }}>
             </Grid>
             <Divider />
             <List>
-              {/* render by mapping through matches */}
+              render by mapping through matches
               {myMatchesName.map((match) => (
                 <ListItem button key="1">
                   <ListItemIcon>
@@ -96,8 +97,8 @@ function Chat({ users, matches }) {
                   <ListItemText primary={match.matchedName}>{match.matchedName}</ListItemText>
                 </ListItem>
               ))}
-              {/* hard coded with values that we have, for sample */}
-              {/* <ListItem button key={myMatchesName[0].matchedName}>
+              hard coded with values that we have, for sample
+              <ListItem button key={myMatchesName[0].matchedName}>
                 <ListItemIcon>
                   <Avatar
                     alt={myMatchesName[0].matchedName}
@@ -105,14 +106,14 @@ function Chat({ users, matches }) {
                   />
                 </ListItemIcon>
                 <ListItemText primary={myMatchesName[0].matchedName}>{myMatchesName[0].matchedName}</ListItemText>
-              </ListItem> */}
+              </ListItem>
             </List>
           </Grid>
 
         </Grid>
-      </div>
+      </div> */}
 
-      {/* <div className="App">
+      <div className="App">
         {!showChat ? (
           <div className="joinChatcontainer">
             <h3>Join the chat</h3>
@@ -134,7 +135,7 @@ function Chat({ users, matches }) {
 
             <Messages socket={socket} username={username} room={room} />
           )}
-      </div> */}
+      </div>
     </>
   );
 }
