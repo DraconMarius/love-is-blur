@@ -1,10 +1,17 @@
+import io from "socket.io-client"
 import React from "react";
 import "../styles/Card.css";
 import { useQuery } from "@apollo/client";
 import { GET_CHAT } from '../utils/queries';
 import Messages from '../pages/Messages'
 
-export default function MessagesCont({ username, socket, chatId, }) {
+export default function MessagesCont({ username, chatId, }) {
+    const socket = io();
+
+    socket.emit("join_room", chatId);
+    console.log(socket.id)
+
+
     const { loading, error, data } = useQuery(GET_CHAT, {
         variables: { chatId: chatId }
     });

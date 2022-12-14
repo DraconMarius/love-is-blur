@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import MessagesCont from '../components/MessagesCont'
@@ -23,7 +23,7 @@ import "../styles/chat.css";
 import { faCommentDollar } from '@fortawesome/free-solid-svg-icons';
 
 
-const socket = io();
+// const socket = io();
 
 
 function Chat({ users, matches }) {
@@ -81,7 +81,6 @@ function Chat({ users, matches }) {
     // setCurrentChat(currentChatRef.current)
     setShowChat(true);
     console.log(currentChatRef.current);
-    socket.emit("join_room", chatId);
   }
 
   return (
@@ -122,7 +121,7 @@ function Chat({ users, matches }) {
           </Grid>
           {(!showChat) ?
             (<div> Chat with your Matches</div>) :
-            (<MessagesCont username={myName} socket={socket} chatId={currentChatRef.current} />)
+            (<MessagesCont username={myName} chatId={currentChatRef.current} />)
           }
         </Grid>
       </div>
