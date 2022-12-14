@@ -3,11 +3,13 @@ import React from "react";
 import "../styles/footer.css";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
+//footer component
 export default function Footer() {
   return (
     <div className="footer">
       <div className="column is-full  ">
         <div className="content has-text-centered ">
+          {/* //addtoany tags to allow users to share the site on social media */}
           <div
             className="a2a_kit a2a_kit_size_32 a2a_default_style"
             data-a2a-icon-color="#808080"

@@ -1,4 +1,8 @@
+// This file defines the schema for the GraphQL API
+//import gql so we can parse the schema
 const { gql } = require("apollo-server-express");
+
+// create typeDefs. typeDefs is a string that defines the schema for the GraphQL API. it tells the server what data is available and how it can be fetched
 
 const typeDefs = gql`
   type User {
@@ -74,7 +78,7 @@ const typeDefs = gql`
       firstname: String
       username: String
       email: String
-    ): Auth    
+    ): Auth
     chat(chatId: ID!): Chat
   }
 `;

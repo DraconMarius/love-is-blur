@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -42,6 +43,7 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
+  //cache so we can store data in the browser
   cache: new InMemoryCache(),
 });
 
@@ -49,7 +51,9 @@ function App() {
   // const isLoggedIn = localStorage.getItem('id_token');
 
   return (
+    //applying the ApolloProvider component to the App component, we can then use the useQuery() Hook in any component to make a GraphQL query.
     <ApolloProvider client={client}>
+      {/* //router component to handle the navigation between pages */}
       <Router>
         <div>
           {/* <PageContainer> */}
