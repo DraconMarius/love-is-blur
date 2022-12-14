@@ -45,7 +45,7 @@ const resolvers = {
     },
 
     createMatch: async (parent, { user1, user2 }) => {
-      console.log("match creation?")
+      console.log("match creation?");
       console.log(user1);
       const newMatch = await Match.create({ user1, user2 });
       const newChat = await Chat.create({});
@@ -105,6 +105,12 @@ const resolvers = {
         { new: true }
       );
       return updatedUser;
+    },
+
+    //delete user
+    deleteUser: async (parent, { userId }) => {
+      const deletedUser = await User.findByIdAndDelete(userId);
+      return deletedUser;
     },
 
     //update user's profile info

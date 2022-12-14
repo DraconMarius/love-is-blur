@@ -63,6 +63,7 @@ const typeDefs = gql`
     createMatch(user1: ID!, user2: ID!): Match
     createMessage(chatId: ID!, messageInput: messageInput): Chat
     updateUser(userId: ID!, likedBy: ID!): User
+    deleteUser(userId: ID!): User
     editUser(
       userId: ID!
       bio: String

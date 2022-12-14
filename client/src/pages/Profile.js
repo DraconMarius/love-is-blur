@@ -2,7 +2,8 @@
 import React, { useState, formState, useRef } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
-import { EDIT_USER } from "../utils/mutations";
+import { EDIT_USER, DELETE_USER } from "../utils/mutations";
+import { useNavigate} from "react-router-dom";
 
 import Auth from "../utils/auth";
 
@@ -20,6 +21,7 @@ function Profile({ user }) {
   //const { update } = useMutation(UPDATE_USER);
   const imgURL = useRef("");
   const [editUser, { error, data }] = useMutation(EDIT_USER);
+
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -83,11 +85,21 @@ function Profile({ user }) {
     // event.preventDefault();
     myWidget.open();
   };
-
-  //   const [formState, setFormState] = useState({
-  //     firstname: {user.firstname},
-  //   })
-
+  const navigate = useNavigate();
+  const [deleteUser] = useMutation(DELETE_USER);
+  const handleDeleteUser = async () => {
+    navigate("/");
+    try {
+      const { deleteData } = await deleteUser({
+        variables: { userId: user._id },
+      });
+      // Handle successful deletion here...
+      // For example, you could display the deleteData in your UI:
+      console.log(deleteData);
+    } catch (deleteError) {
+      console.error(deleteError);
+    }
+  };
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
@@ -183,6 +195,14 @@ function Profile({ user }) {
             )}
           </div> */}
         </form>
+        <motion.button
+          className="button is-danger"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => handleDeleteUser(user._id) && Auth.logout()}
+        >
+          Delete me
+        </motion.button>
       </div>
     </div>
   );
