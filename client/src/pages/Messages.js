@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, render } from 'react';
 import { useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations";
 import {
@@ -23,6 +23,9 @@ export default function Messages({ username, socket, room, messages }) {
     console.log(myself.current);
     console.log(room);
     const [currentMessage, setCurrentMessage] = useState("");
+    // const currentRef = useRef("")
+    const messageRef = useRef([...messages])
+
     // display the chat to the user
     const [messageList, setMessageList] = useState([...messages]);
     console.log(messages);
@@ -30,16 +33,24 @@ export default function Messages({ username, socket, room, messages }) {
 
     const [createMessage, { error, data }] = useMutation(CREATE_MESSAGE)
 
+    const handleChange = (event) => {
+        const { value } = event.target;
+        console.log(currentMessage);
+        setCurrentMessage(value);
+    };
+
     const sendMessage = async () => {
-        if (currentMessage !== "") {
+        if (messageList !== "") {
             const messageData = {
-                room: room,
-                author: username,// we can call this user name, i just thought that could be confusing
-                message: currentMessage,
-                time: // to generate the time the user get the message
-                    new Date(Date.now()).getHours() +
-                    ":" +
-                    new Date(Date.now()).getMinutes(),
+                chatId: room,
+                messages: {
+                    messageAuthor: username,// we can call this user name, i just thought that could be confusing
+                    messageText: currentMessage,
+                    createdAt: // to generate the time the user get the message
+                        new Date(Date.now()).getHours() +
+                        ":" +
+                        new Date(Date.now()).getMinutes(),
+                }
             };
             const messagetoDB = {
                 chatId: room,
@@ -52,13 +63,15 @@ export default function Messages({ username, socket, room, messages }) {
             await createMessage({
                 variables: { ...messagetoDB }
             })
-
+            // console.log(data);
             await socket.emit("send_message", messageData);
-            setMessageList((list) => [...list, messageData]);
+            console.log(messageRef.current)
+            // setMessageList((list) => [...list, messagetoDB]);
+            messageRef.current = [...messageRef.current, messageData.messages];
+            // console.log(messageRef.current)
             setCurrentMessage(""); //set the current message to be empty
-
-            console.log("Author: " + messageData.author + " message details: " + messageData.message);
-
+            console.log("Author: " + messageData.messageAuthor + " message details: " + messageData.messageText);
+            render()
         }
 
 
@@ -68,18 +81,25 @@ export default function Messages({ username, socket, room, messages }) {
         socket.on("receive_message", (data) => {// receive the DATA from the back end index.js server
             // console.log(data);
             // setMessageList((list) => [...list,data])
-            setMessageList((messageList) => [...messageList, data])
+            setMessageList((messageList) => [...messageList, data.messages])
+            messageRef.current = [...messageRef.current, data.messages];
             console.log(data)
+            // console.log(messageRef.current)
         })
         return () => {
             socket.off("receive_message");
         }
-    }, [socket]);
+    }, [socket, messageList]);
+
+    useEffect(() => {
+        console.log(messageRef.current)
+        setMessageList([...messageRef.current])
+    }, [messageRef.current]);
 
 
     const leftRight = (author) => {
-        console.log(author)
-        console.log(myself.current)
+        // console.log(author)
+        // console.log(myself.current)
 
         if (!author) {
             return
@@ -123,11 +143,12 @@ export default function Messages({ username, socket, room, messages }) {
                             label="Type Something"
                             fullWidth
                             onChange={(event) => {
-                                setCurrentMessage(event.target.value);
+                                handleChange(event);
                             }}
                             onKeyDown={(event) => {// added Enter key to be listen
                                 event.key === "Enter" && sendMessage();
                             }}
+                            value={currentMessage}
                         />
                     </Grid>
                     <Grid item={true} xs={1} align="right">

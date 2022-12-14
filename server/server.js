@@ -102,9 +102,10 @@ const startApolloServer = async (typeDefs, resolvers) => {
       socket.on("send_message", (data) => {
         // get the user message in the room
         //data.room will separete the messages per room
-        socket.to(data.room).emit("receive_message", data);
-        console.log(data.author + " " + data.message);
-      });
+        console.log("server-side", data);
+        socket.to(data.chatId).emit("receive_message", data)
+        console.log(data.messages.messageAuthor + " with socketID of " + socket.id + " said " + data.messages.messageText);
+
 
       socket.on("disconnect", () => {
         // disconnect a user
