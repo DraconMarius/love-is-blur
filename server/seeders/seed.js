@@ -1,8 +1,8 @@
-const db = require('../config/connection');
-const { User } = require('../models');
-const userSeeds = require('./userSeeds.json');
-
-db.once('open', async () => {
+const db = require("../config/connection");
+const { User } = require("../models");
+const userSeeds = require("./userSeeds.json");
+//seed the db. delete existing db every time we seed
+db.once("open", async () => {
   try {
     await User.deleteMany({});
 
@@ -12,6 +12,6 @@ db.once('open', async () => {
     process.exit(1);
   }
 
-  console.log('db seeded!');
+  console.log("db seeded!");
   process.exit(0);
 });

@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEnvelope, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Auth from "../utils/auth";
-
+// login page component
 const Login = (props) => {
+  // set initial form state to empty strings
   const [formState, setFormState] = useState({ email: "", password: "" });
+  // useMutation hook to call the login mutation
   const [login, { error, data }] = useMutation(LOGIN);
 
   // update state based on form input changes

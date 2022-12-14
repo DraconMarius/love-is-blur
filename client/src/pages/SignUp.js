@@ -1,9 +1,14 @@
+// import hooks from react
 import React, { useState, useRef } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+//importing motion component from framer motion. {/* //motion.button is a framer motion component that allows us to add animations to our buttons */}
 import { motion } from "framer-motion";
 import "../styles/signup.css";
+//importing usemutation hooks from appplo client so we are able to call our create user mutation
 import { useMutation } from "@apollo/client";
+//importing mutations from client side utils
 import { CREATE_USER } from "../utils/mutations";
+//importing fontawesome icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLock,
@@ -11,9 +16,12 @@ import {
   faCheck,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+//import auth from utils for web token
 import Auth from "../utils/auth";
 
+//our signup page component
 const SignUp = () => {
+  //setting our state for our form data to be empty strings
   const [formState, setFormState] = useState({
     username: "",
     firstname: "",
@@ -21,11 +29,9 @@ const SignUp = () => {
     password: "",
     bio: "",
   });
-  //getting image url
-  //using useRefs
-  // const [imgURL, setimgURL] = useState("");
+  //using useref hook so we can acces the image url from the cloudinary widget
   const imgURL = useRef("");
-
+  //using useMutation hook to call our create user mutation
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   // update state based on form input changes
@@ -41,16 +47,17 @@ const SignUp = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // console.log(formState);
+
     try {
       console.log("flag");
+      // execute addUser mutation and pass in variable data from form
       const { data } = await createUser({
         variables: { ...formState, image: imgURL.current },
       });
       console.log(formState);
       console.log(imgURL);
-      // console.log(data.createUser.user)
-      // console.log(data.createUser.token)
+
+      //create token for user
       Auth.login(data.createUser.token);
     } catch (error) {
       console.log(error);
@@ -65,6 +72,7 @@ const SignUp = () => {
       bio: "",
     });
   };
+  //cloudinary widget so we can upload images
   const cloudName = "dp9s1u3uv";
   const uploadPreset = "ml_default";
   const myWidget = window.cloudinary.createUploadWidget(
@@ -84,7 +92,7 @@ const SignUp = () => {
       }
     }
   );
-
+  //function to open the cloudinary widget
   const openWidget = (myWidget) => {
     // event.preventDefault();
     myWidget.open();
@@ -93,6 +101,7 @@ const SignUp = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
+        {/* need to wrap entire fields in form  and put handleform sumbit here so that all inputted user input is accounted for */}
         <form onSubmit={handleFormSubmit}>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
@@ -194,6 +203,7 @@ const SignUp = () => {
             </p>
           </div>
           <div>
+            {/* error message is signup is unsuccessful */}
             {error && (
               <p className="help is-danger">try again, something went wrong</p>
             )}

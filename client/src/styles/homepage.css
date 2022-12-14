@@ -55,7 +55,9 @@ section:nth-child(4) {
 section span {
   display: block;
   transform: translateX(-100px);
-  opacity: 0;
+  text-align: center;
+
+  /* opacity: 0; */
 }
 
 /* * {

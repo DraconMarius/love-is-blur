@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+//client side queries for our graphql server so that we can use them in our react components
+//query me that returns the user id, username, email, firstname, bio, and image
 export const QUERY_ME = gql`
   query {
     me {
@@ -13,7 +15,7 @@ export const QUERY_ME = gql`
     }
   }
 `;
-
+//query all users that returns the user id, username, email, firstname, bio, and image
 export const ALL_USER = gql`
   query {
     users {
@@ -26,7 +28,7 @@ export const ALL_USER = gql`
     }
   }
 `;
-
+//query match that takes in the match id and returns the match id, user1 id, user2 id, chat id, and the created at date
 export const QUERY_MATCH = gql`
   query match($matchId: ID!) {
     match {
@@ -39,6 +41,7 @@ export const QUERY_MATCH = gql`
   }
 `;
 
+//query all matches that returns the match id, user1 id, user2 id, chat id, and the created at date
 export const GET_ALL_MATCH = gql`
   query matches{
     matches {
@@ -51,7 +54,7 @@ export const GET_ALL_MATCH = gql`
   }
 `
 
-
+//query user that takes in the user id and return a match with the user id, username, email, firstname, bio, and image
 export const GET_USER = gql`
   query user($userId: ID!) {
     user {
@@ -71,7 +74,7 @@ export const GET_USER = gql`
     }
   }
 `;
-
+//query my matches that returns the user id, username, and matches
 export const MY_MATCHES = gql`
   query myMatches{
     myMatches{
@@ -82,7 +85,7 @@ export const MY_MATCHES = gql`
   }
 
 `;
-
+//query chat that takes in the chat id and returns the messages with that chaat id and the chat id, message id, message text, message author, and the created at date
 export const GET_CHAT = gql`
   query getChat($chatId: String!){
     getChat(chatId: $chatId){

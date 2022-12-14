@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  //using strict mode to help us catch bugs
   <React.StrictMode>
     {/* <BrowserRouter> */}
     <App />

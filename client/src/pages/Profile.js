@@ -1,15 +1,22 @@
 // Page to customize your profile/personal information
+//importing hooks from reac
 import React, { useState, formState, useRef } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+//importing hooks from appplo client
+import { useMutation } from "@apollo/client";
+// importing motion component from framer motion. {/* //motion.button is a framer motion component that allows us to add animations to our buttons */}
 import { motion } from "framer-motion";
+//importing mutations from client side utils
 import { EDIT_USER, DELETE_USER } from "../utils/mutations";
-import { useNavigate} from "react-router-dom";
+//importing usenavigate from react router dom
+import { useNavigate } from "react-router-dom";
 
 import Auth from "../utils/auth";
 
 import "../styles/profile.css";
 
+//our profile page component, this componenet is wrapped in the profile container component, whcih is how we have access to the user info.
 function Profile({ user }) {
+  //setting our state for our form data so that the users info will be displayed in the form
   const [formState, setFormState] = useState({
     username: user.username,
     firstname: user.firstname,
@@ -17,12 +24,12 @@ function Profile({ user }) {
     bio: user.bio,
   });
 
-  console.log(user);
-  //const { update } = useMutation(UPDATE_USER);
+  //using useref hook so we can acces the image url from the cloudinary widget
   const imgURL = useRef("");
+  //using useMutation hook to call our edit user mutation
   const [editUser, { error, data }] = useMutation(EDIT_USER);
 
-  // update state based on form input changes
+  //handlechange function to update our form state with the users inputted info from the form
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(formState);
@@ -32,10 +39,10 @@ function Profile({ user }) {
     });
   };
 
+  //handleformsubmit function to prevent the default behavior of the form, and then call our edit user mutation to change the fields in the database
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // console.log(formState);
     try {
       console.log("flag");
 
@@ -46,8 +53,7 @@ function Profile({ user }) {
       console.log("flag");
       console.log(formState);
       console.log(imgURL);
-      // console.log(data.createUser.user)
-      // console.log(data.createUser.token)
+      //user has to be logged in to edit their profile and needs a valid token to do so
       Auth.login(data.editUser.token);
     } catch (error) {
       console.log(error);
@@ -61,6 +67,7 @@ function Profile({ user }) {
       bio: "",
     });
   };
+  //cloudinary widget code. this is the code that allows us to upload images to cloudinary and then get the url of the image to store in our database
   const cloudName = "dp9s1u3uv";
   const uploadPreset = "ml_default";
   const myWidget = window.cloudinary.createUploadWidget(
@@ -80,26 +87,28 @@ function Profile({ user }) {
       }
     }
   );
-
+  //function to open the cloudinary widget
   const openWidget = (myWidget) => {
-    // event.preventDefault();
     myWidget.open();
   };
+  //using usenavigate hook to navigate to the home page after the user deletes their account
   const navigate = useNavigate();
+  //using useMutation hook to call our delete user mutation
   const [deleteUser] = useMutation(DELETE_USER);
+  //handledeleteuser function to call our delete user mutation and then navigate to the home page
   const handleDeleteUser = async () => {
     navigate("/");
     try {
+      // Call our mutation
       const { deleteData } = await deleteUser({
         variables: { userId: user._id },
       });
-      // Handle successful deletion here...
-      // For example, you could display the deleteData in your UI:
       console.log(deleteData);
     } catch (deleteError) {
       console.error(deleteError);
     }
   };
+  //jsx for our profile page
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="is-fullwidth-mobile is-halfwidth-tablet is-one-quarter-desktop">
@@ -120,7 +129,6 @@ function Profile({ user }) {
                 type="text"
                 name="username"
                 value={formState.username}
-                // defaultValue={user.username}
                 onChange={handleChange}
               />
             </p>
@@ -133,7 +141,6 @@ function Profile({ user }) {
                 type="firstname"
                 name="firstname"
                 value={formState.firstname}
-                // defaultValue={user.firstname}
                 onChange={handleChange}
               />
             </p>
@@ -146,7 +153,6 @@ function Profile({ user }) {
                 type="email"
                 name="email"
                 value={formState.email}
-                // defaultValue={user.email}
                 onChange={handleChange}
               />
             </p>
@@ -161,7 +167,6 @@ function Profile({ user }) {
                     name="bio"
                     className="textarea "
                     value={formState.bio}
-                    // defaultValue={user.bio}
                     onChange={handleChange}
                   ></textarea>
                 </div>
@@ -170,6 +175,7 @@ function Profile({ user }) {
           </div>
           <div className="field">
             <p className="control">
+             
               <motion.button
                 className="button is-success"
                 whileHover={{ scale: 1.1 }}
@@ -182,6 +188,7 @@ function Profile({ user }) {
                 whileTap={{ scale: 0.9 }}
                 id="upload-widget-button"
                 className="button is-success"
+                //make sure to call the openwidget function when the upload new photo button is clicked
                 onClick={() => openWidget(myWidget)}
                 type="button"
               >
@@ -199,6 +206,7 @@ function Profile({ user }) {
           className="button is-danger"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          //make sure to call the handledeleteuser function when the delete me button is clicked and also log the user out
           onClick={() => handleDeleteUser(user._id) && Auth.logout()}
         >
           Delete me

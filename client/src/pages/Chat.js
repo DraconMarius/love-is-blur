@@ -1,8 +1,8 @@
-import io from 'socket.io-client';
+import io from "socket.io-client";
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import MessagesCont from '../components/MessagesCont'
-import Auth from '../utils/auth';
+import MessagesCont from "../components/MessagesCont";
+import Auth from "../utils/auth";
 //material ui component
 import {
   Divider,
@@ -20,15 +20,13 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import "../styles/chat.css";
-import { faCommentDollar } from '@fortawesome/free-solid-svg-icons';
-
+import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
 
 const socket = io();
 
-
 function Chat({ users, matches }) {
   // const [currentChat, setCurrentChat] = useState("");
-  const currentChatRef = useRef("")
+  const currentChatRef = useRef("");
   // const [messageData, setMessageData] = useState({ messages: [] });
   const [showChat, setShowChat] = useState(false);
 
@@ -44,27 +42,28 @@ function Chat({ users, matches }) {
   // const me = users.filter(user => user._id == userProfile.data._id);
   // console.log(matches);
 
-  const myMatchesName = matches.map(match => {
+  const myMatchesName = matches.map((match) => {
     // For each item in the first array, find the corresponding item in the second array
     // using the find() method
-    const notMeAry = users.filter(user => user._id !== myUserID)
-    console.log(notMeAry)
-    const usersAry = notMeAry.find(user => (user._id === match.user1) || (user._id === match.user2))
-
+    const notMeAry = users.filter((user) => user._id !== myUserID);
+    console.log(notMeAry);
+    const usersAry = notMeAry.find(
+      (user) => user._id === match.user1 || user._id === match.user2
+    );
+    console.log(notMeAry);
+    console.log(usersAry);
     // Return an object that combines the data from both arrays
     return {
       _id: match._id,
       matchedName: usersAry.firstname,
       matchedImg: usersAry.image,
-      chatId: match.chatId
+      chatId: match.chatId,
     };
   });
 
   console.log(myMatchesName);
 
-
   // setUsername(userProfile.data.firstname)
-
 
   // const joinRoom = () => {
   //   if (username !== "" & room !== "") {
@@ -74,23 +73,21 @@ function Chat({ users, matches }) {
   //   }
   // }
 
-
   const handlechat = async (chatId) => {
     console.log(chatId);
-    currentChatRef.current = (chatId);
+    currentChatRef.current = chatId;
     // setCurrentChat(currentChatRef.current)
     setShowChat(true);
     console.log(currentChatRef.current);
     socket.emit("join_room", chatId);
-  }
+  };
 
   return (
     <>
       <div style={{ height: "100vh", width: "100vw" }}>
         <Grid container component={Paper}>
           <Grid item={true} xs={3}>
-            <Grid item={true} xs={12} style={{ padding: "10px" }}>
-            </Grid>
+            <Grid item={true} xs={12} style={{ padding: "10px" }}></Grid>
             <Divider />
             <List>
               {/* render by mapping through matches */}
@@ -100,12 +97,11 @@ function Chat({ users, matches }) {
                   onClick={() => handlechat(match.chatId)}
                 >
                   <ListItemIcon>
-                    <Avatar
-                      alt={match.matchedName}
-                      src={match.matchedImg}
-                    />
+                    <Avatar alt={match.matchedName} src={match.matchedImg} />
                   </ListItemIcon>
-                  <ListItemText primary={match.matchedName}>{match.matchedName}</ListItemText>
+                  <ListItemText primary={match.matchedName}>
+                    {match.matchedName}
+                  </ListItemText>
                 </ListItemButton>
               ))}
               {/* hard coded with values that we have, for sample */}
@@ -120,15 +116,17 @@ function Chat({ users, matches }) {
               </ListItem> */}
             </List>
           </Grid>
-          {(!showChat) ?
-            (<div> Chat with your Matches</div>) :
-            (<MessagesCont username={myName} socket={socket} chatId={currentChatRef.current} />)
-          }
+          {!showChat ? (
+            <div> Chat with your Matches</div>
+          ) : (
+            <MessagesCont
+              username={myName}
+              socket={socket}
+              chatId={currentChatRef.current}
+            />
+          )}
         </Grid>
       </div>
-
-
-
 
       {/* <Messages socket={socket} username={username} room={room} /> */}
       {/* <div className="App">
