@@ -1,13 +1,35 @@
 import io from 'socket.io-client';
+import React from "react";
 import { useState } from "react";
 import  Messages  from './Messages'
+import auth from '../utils/auth';
+// import { useQuery } from "@apollo/client";
+// import { QUERY_MATCH } from '../utils/queries';
+
 
 const socket = io.connect("http://localhost:3002");
 
-function Chat() {
+function Chat( { users } ) {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false); // only show the chat if the show chat is equal to truehere
+  const [showChat, setShowChat] = useState(false);
+
+  console.log(users);
+
+  const userProfile = auth.getProfile();
+  const myUserID = userProfile.data._id; 
+  console.log(myUserID);
+
+  
+
+
+  
+
+
+  // const { loading, error, data } = useQuery();
+  // console.log(data);
+
+  // const userChats = myUserID.filter() 
 
 const joinRoom = () => {
   if (username !=="" & room !=="") {

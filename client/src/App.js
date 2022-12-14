@@ -8,7 +8,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Chat from './pages/Chat';
+import ChatContainer from './pages/ChatContainer';
 import Card from './pages/Swipe';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -61,7 +61,7 @@ function App() {
 
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/chat" element={<Chat />} />
+            <Route exact path="/chat" element={<ChatContainer />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/swipe" element={<Match />} />
             <Route exact path="/profile" element={<ProfileContainer />} />

@@ -21,6 +21,7 @@ export const ALL_USER = gql`
       firstname
       bio
       likedBy
+      
     }
   }
 `;
