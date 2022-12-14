@@ -9,7 +9,7 @@ const typeDefs = gql`
     firstname: String!
     bio: String!
     likedBy: [String]
-    matches: [Match]
+    matches: [String]
     image: String
   }
 
@@ -17,7 +17,7 @@ const typeDefs = gql`
     _id: ID
     user1: ID!
     user2: ID!
-    chatId: Chat
+    chatId: String
     createdAt: String
   }
 
@@ -48,6 +48,9 @@ const typeDefs = gql`
     user(userId: ID!): User
     users: [User]
     match(matchID: ID!): Match
+    myMatches: User
+    matches: [Match]
+    chat(chatId: ID!): Chat
   }
 
   type Mutation {

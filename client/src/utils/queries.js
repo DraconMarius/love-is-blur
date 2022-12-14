@@ -20,8 +20,9 @@ export const ALL_USER = gql`
       _id
       firstname
       bio
+      image
       likedBy
-      
+      matches
     }
   }
 `;
@@ -37,6 +38,18 @@ export const QUERY_MATCH = gql`
     }
   }
 `;
+
+export const GET_ALL_MATCH = gql`
+  query matches{
+    matches {
+      _id
+      user1
+      user2
+      chatId
+      createdAt
+    }
+  }
+`
 
 
 export const GET_USER = gql`
@@ -57,4 +70,25 @@ export const GET_USER = gql`
       }
     }
   }
+`;
+
+export const MY_MATCHES = gql`
+  query myMatches{
+    myMatches{
+      _id
+      username
+      matches
+    }
+  }
+
+`;
+
+export const GET_CHAT = gql`
+  query chat($chatId: ID!){
+    chat{
+      _id
+      messages
+    }
+  }
+
 `;

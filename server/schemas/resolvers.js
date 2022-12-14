@@ -20,9 +20,22 @@ const resolvers = {
       // return allButMe.filter(user => { user.likedBy )
     },
 
+    myMatches: async (parent, args, context) => {
+      console.log("getting all matches for logged in user");
+      return User.findById(context.user._id);
+    },
+
     match: async (parent, args) => {
       return Match.findById(args.matchId).populate("chatId");
     },
+
+    matches: async () => {
+      return Match.find().populate("chatId");
+    },
+
+    chat: async (parent, { chatId }) => {
+      return Chat.findById(chatId).populate("messages")
+    }
   },
 
   Mutation: {
@@ -45,7 +58,7 @@ const resolvers = {
     },
 
     createMatch: async (parent, { user1, user2 }) => {
-      console.log("match creation?");
+      console.log("match creation?")
       console.log(user1);
       const newMatch = await Match.create({ user1, user2 });
       const newChat = await Chat.create({});
