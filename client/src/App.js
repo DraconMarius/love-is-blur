@@ -13,7 +13,7 @@ import Card from './pages/Swipe';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+import ChatSkele from './pages/chatSkeleton';
 import ProfileContainer from './pages/ProfileContainer';
 import NavigateTabs from './components/NavigationTabs';
 import Footer from './components/Footer';
@@ -58,7 +58,7 @@ function App() {
             {/* <Route 
           exact path="/" element={isLoggedIn ? (
           ) : (<Navigate replace to="/login" />)} /> */}
-
+            <Route exact path="/skele" element={<ChatSkele />} />
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/chat" element={<ChatContainer />} />

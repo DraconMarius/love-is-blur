@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/NavigationTabs.css";
 import { useState } from "react";
@@ -8,6 +8,13 @@ import Auth from "../utils/auth";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 function NavigationTabs() {
   const [isActive, setisActive] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    navigate('/')
+  };
+
+
   return (
     <>
       {Auth.loggedIn() ? (
@@ -75,7 +82,7 @@ function NavigationTabs() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <Link onClick={Auth.logout}>Logout</Link>
+                      <Link to="/" onClick={Auth.logout}>Logout</Link>
                     </motion.div>
                   </div>
                 </div>

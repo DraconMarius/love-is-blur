@@ -11,8 +11,7 @@ const matchSchema = new Schema({
     ref: 'User',
   },
   chatId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Chat',
+    type: String
   },
   createdAt: {
     type: Date,
