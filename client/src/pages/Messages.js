@@ -1,12 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations";
+import {
+    Divider,
+    Grid,
+    ListItemIcon,
+    ListItemButton,
+    List,
+    Avatar,
+    ListItem,
+    ListItemText,
+    Paper,
+    TextField,
+    Typography,
+    Fab,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 
-export default function Messages({ socket, username, room }) {
+export default function Messages({ username, socket, room, messages }) {
+    const myself = useRef(username)
+    console.log(myself.current);
+    console.log(room);
     const [currentMessage, setCurrentMessage] = useState("");
     // display the chat to the user
-    const [messageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState([...messages]);
+    console.log(messages);
+    console.log(messageList);
 
     const [createMessage, { error, data }] = useMutation(CREATE_MESSAGE)
 
@@ -56,39 +76,103 @@ export default function Messages({ socket, username, room }) {
         }
     }, [socket]);
 
+
+    const leftRight = (author) => {
+        console.log(author)
+        console.log(myself.current)
+
+        if (!author) {
+            return
+        } else if (author === myself.current) {
+            return "right"
+        }
+
+        return "left"
+    }
+
     return (
-        <div className="chat-window">
-            <div className="chat-header">
-                <p>Live Chat</p>
-            </div>
-            <div className="chat-body">
-                {messageList.map((messageContent, index) => {
-                    return <div key={index} className="message" id={username === messageContent.author ? "you" : "other"}>
-                        <div>
-                            <div className="message-content">
-                                <p>{messageContent.message}</p>
-                            </div>
+        <>
+            <Grid item={true} xs={9}>
+                <List>
 
-                            <div className="message-meta">
-                                <p id="time">{messageContent.time}</p>
-                                <p id="author">{messageContent.author}</p>
-                            </div>
+                    {messageList.map((messageContent, index) => (
+                        <ListItem key={index}>
+                            <Grid container>
+                                <Grid item={true} xs={12}>
+                                    <ListItemText
+                                        align={leftRight(messageContent.messageAuthor)}
+                                        primary={messageContent.messageText}
+                                    ></ListItemText>
+                                </Grid>
+                                <Grid item={true} xs={12}>
+                                    <ListItemText
+                                        align={leftRight(messageContent.messageAuthor)}
+                                        primary={messageContent.messageAuthor}
+                                        secondary={messageContent.createdAt}></ListItemText>
+                                </Grid>
+                            </Grid>
+                        </ListItem>
+                    ))}
 
-                        </div>
+                </List>
+                <Divider />
+                <Grid container style={{ padding: "20px" }}>
+                    <Grid item={true} xs={11}>
+                        <TextField
+                            id="outlined-basic-email"
+                            label="Type Something"
+                            fullWidth
+                            onChange={(event) => {
+                                setCurrentMessage(event.target.value);
+                            }}
+                            onKeyDown={(event) => {// added Enter key to be listen
+                                event.key === "Enter" && sendMessage();
+                            }}
+                        />
+                    </Grid>
+                    <Grid item={true} xs={1} align="right">
+                        <Fab color="primary" aria-label="add">
+                            <SendIcon onClick={sendMessage} />
+                        </Fab>
+                    </Grid>
+                </Grid>
+
+
+
+                {/* <div className="chat-window">
+                    <div className="chat-header">
+                        <p>Live Chat</p>
                     </div>
-                })}
-            </div>
-            <div className="chat-footer">
-                <input type="text" placeholder='Hey...'
-                    onChange={(event) => {
-                        setCurrentMessage(event.target.value);
-                    }}
-                    onKeyDown={(event) => {// added Enter key to be listen
-                        event.key === "Enter" && sendMessage();
-                    }}
-                />
-                <button onClick={sendMessage}>Send</button>
-            </div>
-        </div>
+                    <div className="chat-body">
+                        {messageList.map((messageContent, index) => {
+                            return <div key={index} className="message" id={username === messageContent.author ? "you" : "other"}>
+                                <div>
+                                    <div className="message-content">
+                                        <p>{messageContent.message}</p>
+                                    </div>
+
+                                    <div className="message-meta">
+                                        <p id="time">{messageContent.time}</p>
+                                        <p id="author">{messageContent.author}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        })}
+                    </div>
+                    <div className="chat-footer">
+                        <input type="text" placeholder='Hey...'
+                            onChange={(event) => {
+                                setCurrentMessage(event.target.value);
+                            }}
+                            onKeyDown={(event) => {// added Enter key to be listen
+                                event.key === "Enter" && sendMessage();
+                            }}
+                        />
+                        <button onClick={sendMessage}>Send</button>
+                    </div>
+                </div> */}
+            </Grid>
+        </>
     )
 }

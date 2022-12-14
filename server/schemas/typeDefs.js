@@ -50,7 +50,7 @@ const typeDefs = gql`
     match(matchID: ID!): Match
     myMatches: User
     matches: [Match]
-    chat(chatId: ID!): Chat
+    getChat(chatId: String!): Chat
   }
 
   type Mutation {
@@ -74,7 +74,8 @@ const typeDefs = gql`
       firstname: String
       username: String
       email: String
-    ): Auth
+    ): Auth    
+    chat(chatId: ID!): Chat
   }
 `;
 

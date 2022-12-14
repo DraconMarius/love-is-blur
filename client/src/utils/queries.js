@@ -84,11 +84,14 @@ export const MY_MATCHES = gql`
 `;
 
 export const GET_CHAT = gql`
-  query chat($chatId: ID!){
-    chat{
+  query getChat($chatId: String!){
+    getChat(chatId: $chatId){
       _id
-      messages
+      messages{
+        _id
+        messageText
+        messageAuthor
+        createdAt
+      }
     }
-  }
-
-`;
+  }`;

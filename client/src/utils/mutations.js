@@ -127,3 +127,16 @@ export const DELETE_USER = gql`
      }
    }
  `;
+
+export const GET_CHAT = gql`
+  mutation chat($chatId: String!){
+    chat(chatId: $chatId){
+      messages{
+        messageText
+        messageAuthor
+        createdAt
+      }
+    }
+  }
+
+`;

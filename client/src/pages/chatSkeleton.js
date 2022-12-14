@@ -28,19 +28,19 @@ import SendIcon from "@mui/icons-material/Send";
 // import Fab from "@material-ui/core/Fab";
 // import SendIcon from "@material-ui/icons/Send";
 import "../styles/chat.css";
-const Chat = () => {
+const ChatSkele = () => {
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <Grid container>
+      {/* <Grid container>
         <Grid item={true} xs={12}>
           <Typography variant="h5" className="header-message">
             Chat
           </Typography>
         </Grid>
-      </Grid>
+      </Grid> */}
       <Grid container component={Paper}>
         <Grid item={true} xs={3}>
-          <List>
+          {/* <List>
             <ListItem button key="RemySharp">
               <ListItemIcon>
                 <Avatar
@@ -50,15 +50,15 @@ const Chat = () => {
               </ListItemIcon>
               <ListItemText primary="John Wick"></ListItemText>
             </ListItem>
-          </List>
-          <Divider />
+          </List> */}
+          {/* <Divider /> */}
           <Grid item={true} xs={12} style={{ padding: "10px" }}>
-            <TextField
+            {/* <TextField
               id="outlined-basic-email"
               label="Search"
               variant="outlined"
               fullWidth
-            />
+            /> */}
           </Grid>
           <Divider />
           <List>
@@ -69,10 +69,8 @@ const Chat = () => {
                   src="https://material-ui.com/static/images/avatar/1.jpg"
                 />
               </ListItemIcon>
-              <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-              <ListItemText secondary="online" align="right"></ListItemText>
-            </ListItem>
-            <ListItem button key="Alice">
+              <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>            </ListItem>
+            {/* <ListItem button key="Alice">
               <ListItemIcon>
                 <Avatar
                   alt="Alice"
@@ -89,7 +87,7 @@ const Chat = () => {
                 />
               </ListItemIcon>
               <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
-            </ListItem>
+            </ListItem> */}
           </List>
         </Grid>
         <Grid item={true} xs={9}>
@@ -107,7 +105,7 @@ const Chat = () => {
                 </Grid>
               </Grid>
             </ListItem>
-            <ListItem key="2">
+            {/* <ListItem key="2">
               <Grid container>
                 <Grid item={true} xs={12}>
                   <ListItemText
@@ -119,8 +117,8 @@ const Chat = () => {
                   <ListItemText align="left" secondary="09:31"></ListItemText>
                 </Grid>
               </Grid>
-            </ListItem>
-            <ListItem key="3">
+            </ListItem> */}
+            {/* <ListItem key="3">
               <Grid container>
                 <Grid item={true} xs={12}>
                   <ListItemText
@@ -132,7 +130,7 @@ const Chat = () => {
                   <ListItemText align="right" secondary="10:30"></ListItemText>
                 </Grid>
               </Grid>
-            </ListItem>
+            </ListItem> */}
           </List>
           <Divider />
           <Grid container style={{ padding: "20px" }}>
@@ -155,4 +153,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatSkele;
