@@ -105,7 +105,7 @@ const ChatSkele = () => {
                 </Grid>
               </Grid>
             </ListItem>
-            <ListItem key="2">
+            {/* <ListItem key="2">
               <Grid container>
                 <Grid item={true} xs={12}>
                   <ListItemText
@@ -117,8 +117,8 @@ const ChatSkele = () => {
                   <ListItemText align="left" secondary="09:31"></ListItemText>
                 </Grid>
               </Grid>
-            </ListItem>
-            <ListItem key="3">
+            </ListItem> */}
+            {/* <ListItem key="3">
               <Grid container>
                 <Grid item={true} xs={12}>
                   <ListItemText
@@ -130,7 +130,7 @@ const ChatSkele = () => {
                   <ListItemText align="right" secondary="10:30"></ListItemText>
                 </Grid>
               </Grid>
-            </ListItem>
+            </ListItem> */}
           </List>
           <Divider />
           <Grid container style={{ padding: "20px" }}>

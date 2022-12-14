@@ -33,9 +33,9 @@ const resolvers = {
       return Match.find().populate("chatId");
     },
 
-    chat: async (parent, { chatId }) => {
-      return Chat.findById(chatId).populate("messages")
-    }
+    getChat: async (parent, { chatId }) => {
+      return Chat.findById(chatId);
+    },
   },
 
   Mutation: {
