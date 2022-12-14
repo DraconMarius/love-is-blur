@@ -6,25 +6,31 @@ import { useState } from "react";
 import Auth from "../utils/auth";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
+//navigation tabs component
 function NavigationTabs() {
+  //setting our state for our navbar burger
   const [isActive, setisActive] = useState(false);
-  const navigate = useNavigate();
 
-  const handleLogOut = async () => {
-    navigate('/')
-  };
+  // const navigate = useNavigate();
 
+  // const handleLogOut = async () => {
+  //   navigate('/')
+  // };
 
+  // navbar jsx
   return (
     <>
+      {/* //if the user is logged in, display the navbar with the links to the home, chat, swipe and profile pages, and a logout button */}
       {Auth.loggedIn() ? (
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <a
+              //setting our state for our navbar burger to active when clicked
               onClick={() => {
                 setisActive(!isActive);
               }}
               role="button"
+              //if isActive is true, add the is-active class to the navbar burger to see the navbar menu
               className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
               aria-label="menu"
               aria-expanded="false"
@@ -39,14 +45,17 @@ function NavigationTabs() {
 
           <div
             id="navbarBasicExample"
+            //if isActive is true, add the is-active class to the navbar menu to see the navbar menu
             className={`navbar-menu ${isActive ? "is-active" : ""}`}
           >
             <div className="navbar-start">
+              {/* //motion.div is a framer motion component that allows us to add animations to our links */}
               <motion.div
                 className="nav-link"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
+                {/* //link to home page */}
                 <Link to="/">Home</Link>
               </motion.div>
 
@@ -82,7 +91,10 @@ function NavigationTabs() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <Link to="/" onClick={Auth.logout}>Logout</Link>
+                      {/* //logout button directs to homepage and logs user out */}
+                      <Link to="/" onClick={Auth.logout}>
+                        Logout
+                      </Link>
                     </motion.div>
                   </div>
                 </div>
@@ -91,6 +103,7 @@ function NavigationTabs() {
           </div>
         </nav>
       ) : (
+        //if the user is not logged in, display the navbar with the links to the home, signup and login pages
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <a
