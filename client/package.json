@@ -20,7 +20,11 @@
     "react-tinder-card": "^1.6.2",
     "socket.io-client": "^4.5.4",
     "react-moving-text": "^0.0.7",
-    "framer": "^2.2.1"
+    "framer": "^2.2.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
