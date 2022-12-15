@@ -1,18 +1,21 @@
 import io from "socket.io-client"
 import React from "react";
 import "../styles/Card.css";
+import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_CHAT, GET_USER } from '../utils/queries';
 import Messages from '../pages/Messages'
 
-export default function MessagesCont({ username, chatId, myIMG, otherIMG }) {
+export default function MessagesCont(props) {
+
+
     const socket = io();
 
-    socket.emit("join_room", chatId);
+    socket.emit("join_room", props.chatId);
     console.log(socket.id)
 
     const { loading: chatLoading, data: chatData } = useQuery(GET_CHAT, {
-        variables: { chatId: chatId }
+        variables: { chatId: props.chatId }
     });
     const messages = chatData?.getChat.messages || [];
     // console.log(username)
@@ -38,12 +41,12 @@ export default function MessagesCont({ username, chatId, myIMG, otherIMG }) {
         <>
             {(chatLoading) ? (<div>Loading...</div>)
                 : (<Messages
-                    username={username}
+                    username={props.username}
                     socket={socket}
-                    room={chatId}
+                    room={props.chatId}
                     messages={messages}
-                    myIMG={myIMG}
-                    otherIMG={otherIMG} />)}
+                    myIMG={props.myIMG}
+                    otherIMG={props.otherIMG} />)}
         </>
     )
 

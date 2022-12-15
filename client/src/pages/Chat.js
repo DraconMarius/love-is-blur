@@ -67,12 +67,14 @@ function Chat({ users, matches }) {
 
   useEffect(() => {
     setCurrentChat(currentChatRef.current)
-  }, [])
+  }, [currentChatRef])
 
   const handlechat = async (chatId, img) => {
     console.log(chatId);
     currentChatRef.current = chatId;
     matchedImgRef.current = img;
+    // lol i technically cheated lol
+    setShowChat(false);
     setShowChat(true);
     console.log(matchedImgRef.current);
     console.log(currentChatRef.current);
@@ -80,7 +82,7 @@ function Chat({ users, matches }) {
 
 
   const Style = {
-    blur: {   
+    blur: {
       filter: `blur(20px)`
     }
   };
@@ -106,17 +108,8 @@ function Chat({ users, matches }) {
                     {match.matchedName}
                   </ListItemText>
                 </ListItemButton>
-              ))}
-              {/* hard coded with values that we have, for sample */}
-              {/* <ListItem button key={myMatchesName[0].matchedName}>
-                <ListItemIcon>
-                  <Avatar
-                    alt={myMatchesName[0].matchedName}
-                    src={myMatchesName[0].matchedImg}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={myMatchesName[0].matchedName}>{myMatchesName[0].matchedName}</ListItemText>
-              </ListItem> */}
+              ))};
+
             </List>
           </Grid>
           <Grid item={true} xs={9}>
@@ -138,30 +131,6 @@ function Chat({ users, matches }) {
         </Grid>
       </div>
 
-      {/* <Messages socket={socket} username={username} room={room} /> */}
-      {/* <div className="App">
-        {!showChat ? (
-          <div className="joinChatcontainer">
-            <h3>Join the chat</h3>
-            <input type="text" placeholder="Luiz..."
-              onChange={(event) => {
-                setUsername(event.target.value)
-              }}
-            />
-            <input type="text" placeholder="Room ID..."
-              onChange={(event) => {
-                setRoom(event.target.value)
-              }}
-            />
-            <button onClick={joinRoom}>Join a Room</button>
-
-          </div>
-        )
-          : (
-
-            <Messages socket={socket} username={username} room={room} />
-          )}
-      </div> */}
     </>
   );
 }

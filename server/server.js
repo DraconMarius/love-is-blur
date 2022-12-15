@@ -68,7 +68,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 // send every other request to the React
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
@@ -106,10 +106,10 @@ const startApolloServer = async (typeDefs, resolvers) => {
         socket.to(data.chatId).emit('receive_message', data);
         console.log(
           data.messages.messageAuthor +
-            ' with socketID of ' +
-            socket.id +
-            ' said ' +
-            data.messages.messageText
+          ' with socketID of ' +
+          socket.id +
+          ' said ' +
+          data.messages.messageText
         );
 
         socket.on('disconnect', () => {
