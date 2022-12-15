@@ -68,11 +68,13 @@ function Profile({ user }) {
     });
   };
   //cloudinary widget code. this is the code that allows us to upload images to cloudinary and then get the url of the image to store in our database
- 
+
+  const cloudName = "dp9s1u3uv";
+  const uploadPreset = "ml_default";
   const myWidget = window.cloudinary.createUploadWidget(
     {
-      cloudName: process.env.cloudName,
-      uploadPreset: process.env.uploadPreset,
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
       cropping: true,
       multiple: false,
     },
