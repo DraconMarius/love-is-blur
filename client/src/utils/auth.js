@@ -40,7 +40,7 @@ class Auth {
   // The logout() method removes the token from localStorage and reloads the page.
   logout() {
     localStorage.removeItem("id_token");
-    window.location.reload();
+    window.location.replace("/");
   }
 }
 

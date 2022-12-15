@@ -36,7 +36,7 @@ module.exports = {
   // function for signing tokens on user login
   signToken: function ({ email, username, _id, firstname }) {
     // create a JWT payload containing the user's username and id
-    const payload = { email, username, _id, firstname };
+    const payload = { email, username, _id, firstname, image };
     // sign the token
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
