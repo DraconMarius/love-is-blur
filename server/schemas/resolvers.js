@@ -112,6 +112,8 @@ const resolvers = {
         { new: true, upsert: true }
       );
 
+      console.log("updateChat", updateChat);
+
       return updateChat;
     },
 

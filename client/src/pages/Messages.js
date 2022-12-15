@@ -18,6 +18,8 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 
 
+
+
 export default function Messages({ username, socket, room, messages }) {
     const myself = useRef(username)
     console.log(myself.current);
@@ -52,16 +54,14 @@ export default function Messages({ username, socket, room, messages }) {
             await createMessage({
                 variables: { ...messagetoDB }
             })
+            setCurrentMessage("");
 
             await socket.emit("send_message", messageData);
             setMessageList((list) => [...list, messageData]);
-            setCurrentMessage(""); //set the current message to be empty
+            
 
             console.log("Author: " + messageData.author + " message details: " + messageData.message);
-
         }
-
-
     };
 
     useEffect(() => {
@@ -128,11 +128,12 @@ export default function Messages({ username, socket, room, messages }) {
                             onKeyDown={(event) => {// added Enter key to be listen
                                 event.key === "Enter" && sendMessage();
                             }}
+                            value={currentMessage}
                         />
                     </Grid>
                     <Grid item={true} xs={1} align="right">
                         <Fab color="primary" aria-label="add">
-                            <SendIcon onClick={sendMessage} />
+                            <SendIcon onClick={sendMessage}  />
                         </Fab>
                     </Grid>
                 </Grid>
