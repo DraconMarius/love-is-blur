@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import MessagesCont from "../components/MessagesCont";
+import Blur from './Blur'
 import Auth from "../utils/auth";
 //material ui component
 import {
@@ -12,22 +13,19 @@ import {
   ListItemButton,
   List,
   Avatar,
-  ListItem,
   ListItemText,
   Paper,
-  TextField,
-  Typography,
-  Fab,
 } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
 import "../styles/chat.css";
-import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
+
+// import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
 
 // const socket = io();
 
 function Chat({ users, matches }) {
-  // const [currentChat, setCurrentChat] = useState("");
+  const [currentChat, setCurrentChat] = useState("");
   const currentChatRef = useRef("");
+  const matchedImgRef = useRef("");
   // const [messageData, setMessageData] = useState({ messages: [] });
   const [showChat, setShowChat] = useState(false);
 
@@ -36,6 +34,7 @@ function Chat({ users, matches }) {
   const userProfile = Auth.getProfile();
   const myUserID = userProfile.data._id;
   const myName = userProfile.data.firstname;
+  const myIMG = userProfile.data.image;
   console.log(myUserID);
   console.log(myName);
 
@@ -66,20 +65,24 @@ function Chat({ users, matches }) {
 
   // setUsername(userProfile.data.firstname)
 
-  // const joinRoom = () => {
-  //   if (username !== "" & room !== "") {
-  //     socket.emit("join_room", room);
-  //     setShowChat(true);
-  //     console.log(socket.id)
-  //   }
-  // }
+  useEffect(() => {
+    setCurrentChat(currentChatRef.current)
+  }, [])
 
-  const handlechat = async (chatId) => {
+  const handlechat = async (chatId, img) => {
     console.log(chatId);
     currentChatRef.current = chatId;
-    // setCurrentChat(currentChatRef.current)
+    matchedImgRef.current = img;
     setShowChat(true);
+    console.log(matchedImgRef.current);
     console.log(currentChatRef.current);
+  };
+
+
+  const Style = {
+    blur: {   
+      filter: `blur(20px)`
+    }
   };
 
   return (
@@ -94,10 +97,10 @@ function Chat({ users, matches }) {
               {myMatchesName.map((match) => (
                 <ListItemButton
                   key={match._id}
-                  onClick={() => handlechat(match.chatId)}
+                  onClick={() => handlechat(match.chatId, match.matchedImg)}
                 >
                   <ListItemIcon>
-                    <Avatar alt={match.matchedName} src={match.matchedImg} />
+                    <Avatar alt={match.matchedName} src={match.matchedImg} style={Style.blur} />
                   </ListItemIcon>
                   <ListItemText primary={match.matchedName}>
                     {match.matchedName}
@@ -116,10 +119,22 @@ function Chat({ users, matches }) {
               </ListItem> */}
             </List>
           </Grid>
-          {(!showChat) ?
-            (<div> Chat with your Matches</div>) :
-            (<MessagesCont username={myName} chatId={currentChatRef.current} />)
-          }
+          <Grid item={true} xs={9}>
+            <Grid item={true} xs={12} style={{ padding: "10px" }}></Grid>
+            <Divider />
+            {(!showChat) ?
+              (
+                <ListItemText
+                  align={"middle"}
+                  primary={"Chat with your Matches"}>
+                </ListItemText>) :
+              (<MessagesCont
+                username={myName}
+                chatId={currentChatRef.current}
+                myIMG={myIMG}
+                otherIMG={matchedImgRef.current} />)
+            }
+          </Grid>
         </Grid>
       </div>
 

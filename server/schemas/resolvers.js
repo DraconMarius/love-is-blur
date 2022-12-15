@@ -13,7 +13,7 @@ const resolvers = {
     },
     // get user by id and populate their matches
     user: async (parent, { userId }) => {
-      return User.findById(userId).populate("matches");
+      return User.findById(userId);
     },
     // get all users and populate their likedBy field
     users: async (parent, args, context) => {

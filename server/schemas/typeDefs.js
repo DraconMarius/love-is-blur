@@ -49,7 +49,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    user(userId: ID!): User
+    user(userId: String!): User
     users: [User]
     match(matchID: ID!): Match
     myMatches: User

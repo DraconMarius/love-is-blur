@@ -56,21 +56,14 @@ export const GET_ALL_MATCH = gql`
 
 //query user that takes in the user id and return a match with the user id, username, email, firstname, bio, and image
 export const GET_USER = gql`
-  query user($userId: ID!) {
+  query user($userId: String!) {
     user {
       _id
       username
       email
       firstname
       bio
-      image
-      likedBy
-      matches {
-        user1
-        user2
-        chatId
-        createdAt
-      }
+      images
     }
   }
 `;
