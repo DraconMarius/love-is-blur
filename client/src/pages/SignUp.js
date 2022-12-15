@@ -73,12 +73,11 @@ const SignUp = () => {
     });
   };
   //cloudinary widget so we can upload images
-  const cloudName = "dp9s1u3uv";
-  const uploadPreset = "ml_default";
+
   const myWidget = window.cloudinary.createUploadWidget(
     {
-      cloudName: cloudName,
-      uploadPreset: uploadPreset,
+      cloudName: process.env.cloudName,
+      uploadPreset: process.env.uploadPreset,
       cropping: true,
       multiple: false,
     },
