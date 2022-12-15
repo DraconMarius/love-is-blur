@@ -5,19 +5,21 @@ import {
     Divider,
     Grid,
     List,
+    Avatar,
     ListItem,
+    ListItemIcon,
     ListItemText,
     TextField,
     Fab,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-
-export default function Messages({ username, socket, room, messages }) {
+export default function Messages({ username, socket, room, messages, myIMG, otherIMG }) {
     const myself = useRef(username);
     console.log(myself.current);
     console.log(room);
     const [currentMessage, setCurrentMessage] = useState('');
+    const [messageLength, setLength] = useState(messages.Length);
     // const currentRef = useRef("")
     const messageRef = useRef([...messages]);
 
@@ -95,6 +97,7 @@ export default function Messages({ username, socket, room, messages }) {
         setMessageList([...messageRef.current]);
     }, [messageRef.current]);
 
+
     const leftRight = (author) => {
         // console.log(author)
         // console.log(myself.current)
@@ -107,9 +110,28 @@ export default function Messages({ username, socket, room, messages }) {
 
         return 'left';
     };
+    //blur logic
+    const Style = {
+        blur: {   //if messages are less than or == 10,  blur incremently, otherwise no blur
+            filter: `blur(${messages.length <= 10 ? 20 - (messages.length * 2) : 0}px)`
+        }
+    }
+
+
+
 
     return (
         <>
+            <Grid item={true} xs={12} style={{ padding: "10px", display: 'flex', justifyContent: 'center' }}>
+
+                <Avatar
+                    alt="otherUser"
+                    src={otherIMG}
+                    sx={{ width: 100, height: 100, margin: 'auto' }}
+                    style={Style.blur}
+                />
+
+            </Grid>
             <List>
                 {messageList.map((messageContent, index) => (
                     <ListItem key={index}>

@@ -34,7 +34,7 @@ module.exports = {
     return req;
   },
   // function for signing tokens on user login
-  signToken: function ({ email, username, _id, firstname }) {
+  signToken: function ({ email, username, _id, firstname, image }) {
     // create a JWT payload containing the user's username and id
     const payload = { email, username, _id, firstname, image };
     // sign the token
