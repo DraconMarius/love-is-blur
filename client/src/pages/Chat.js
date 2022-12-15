@@ -78,6 +78,13 @@ function Chat({ users, matches }) {
     console.log(currentChatRef.current);
   };
 
+
+  const Style = {
+    blur: {   
+      filter: `blur(20px)`
+    }
+  };
+
   return (
     <>
       <div style={{ height: "100vh", width: "100vw" }}>
@@ -93,7 +100,7 @@ function Chat({ users, matches }) {
                   onClick={() => handlechat(match.chatId, match.matchedImg)}
                 >
                   <ListItemIcon>
-                    <Avatar alt={match.matchedName} src={match.matchedImg} />
+                    <Avatar alt={match.matchedName} src={match.matchedImg} style={Style.blur} />
                   </ListItemIcon>
                   <ListItemText primary={match.matchedName}>
                     {match.matchedName}
