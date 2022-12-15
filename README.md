@@ -2,7 +2,7 @@
 
 ## Description
 
-Our dating app is all about prioritizing values over looks. Instead of basing decisions on appearances, our app encourages users to get to know each other on a deeper level. This is made possible by not allowing users to see each other's photos. Our app is built using React, GraphQL, Apollo, material-UI, Bulma and Mongoose among others. These technologies allow us to create a unique and user-friendly experience. Whether you're looking for a long-term relationship or just looking to meet new people, give our app a try and see the difference for yourself!
+Our dating app is all about prioritizing values over looks. Instead of basing decisions on appearances, our app encourages users to get to know each other on a deeper level. This is made possible by not allowing users to see each other's photos until they match and send messages for a bit. Pictures start blurred and gradually unblur, hence our name Love is Blur. Our app is built using React, GraphQL, Apollo, material-UI, Bulma and Mongoose among others. These technologies allow us to create a unique and user-friendly experience. Whether you're looking for a long-term relationship or just looking to meet new people, give our app a try and see the difference for yourself!
 
 [Click here for a link to the deployed app!](https://love-is-blur.herokuapp.com/)
 
@@ -12,6 +12,7 @@ Our dating app is all about prioritizing values over looks. Instead of basing de
 - [Usage](#Usage)
 - [Features](#Features)
 - [Code-Snippets](#Code-Snippets)
+- [Built-With](#Built-With)
 - [Authors](#Authors)
 - [Contributing-Guidlines](#Contributing-Guidlines)
 - [Questions](#Questions)
@@ -19,34 +20,35 @@ Our dating app is all about prioritizing values over looks. Instead of basing de
 
 ## Usage
 
-To run our app on your local machine all you need to do is fork the repo, install the dependencies, run "npm run seed" and "npm run develop" in the root directory and it will start up the server and webpage.
+Make sure you have mongoDB and MongoDB Compass installed first. Next, to run our app on your local machine all you need to do is fork the repo, install the dependencies, run "npm run seed" and "npm run develop" in the root directory and it will start up the server and webpage.
 
 ## Features
 
-# Homepage
+### Homepage
 
 The first thing you see is our homepage, with a few sections if you scroll down it you see the text effects. This was made with framer and react-moving-text.
-[homepage gif](./client/gifs/home.gif)
+![homepage gif](./client/gifs/home.gif)
 
-# Sign Up
+### Sign Up
 
 The first thing you need to do is sign up and upload a photo and name and bio about yourself. We use the cloudinary widget to upload photos for storage.heres a gif of what sign up looks like:
-[sign up gif](./client/gifs/signup.gif)
+![sign up gif](./client/gifs/signup.gif)
 
-# Swipe
+### Swipe
 
 Next, you cant get to the swiping. Our swiping was somwhat based off of tinder and we use react-tinder-card npm pacakge to give it funtionality. If someone you liked, also likes you back, you will be notified.
-[swipe gif](./client/gifs/swipe.gif)
+![swipe gif](./client/gifs/swipe.gif)
 
-# Chat
+### Chat
 
-We have a chat page where all you matches will be located and where you can message them. Here's what is looks like:
-[chat gif](./client/gifs/chat.gif)
+We have a chat page where all you matches will be located and where you can message them. Both your and your match's pictures will start blurred and will gradually unblur as you send messages.Here's what is looks like:
+![chat gif](./client/gifs/blur-is-done.gif)
 
-# Edit Profile
+### Edit Profile
 
 The edit profile page is wher eyou can upload a new image and update your bio and name.
-[edit profile gif](./client/gifs/editProfile.gif)
+
+![edit profile gif](./client/gifs/editProfile.gif)
 
 ## Code Snippets
 
@@ -77,9 +79,18 @@ const openWidget = (myWidget) => {
 };
 ```
 
-## License
+Here's another interesting code snippet. This is our logic for gradually unblurring the profile pictures as the users send messages to eachother:
 
-Licensed under the MIT license.[License details here](https://opensource.org/licenses/MIT)
+```
+
+    //blur logic
+    const Style = {
+        blur: {   //if messages are less than or == 10,  blur incremently, otherwise no blur
+            filter: `blur(${messages.length <= 10 ? 20 - (messages.length * 2) : 0}px)`
+        }
+    }
+
+```
 
 ## Built With
 
@@ -99,8 +110,6 @@ Licensed under the MIT license.[License details here](https://opensource.org/lic
 - ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 - ![Bulma](https://img.shields.io/badge/bulma-00D0B1?style=for-the-badge&logo=bulma&logoColor=white)
 - ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
-
-## Code Snippets
 
 ## Authors
 
@@ -133,3 +142,7 @@ If you would like to contribute to this app, please create an issue and we can d
 ## Questions
 
 For any questions, please reach out by creating an issue.
+
+## License
+
+Licensed under the MIT license.[License details here](https://opensource.org/licenses/MIT)
