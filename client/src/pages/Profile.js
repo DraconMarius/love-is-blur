@@ -68,12 +68,11 @@ function Profile({ user }) {
     });
   };
   //cloudinary widget code. this is the code that allows us to upload images to cloudinary and then get the url of the image to store in our database
-  const cloudName = "dp9s1u3uv";
-  const uploadPreset = "ml_default";
+ 
   const myWidget = window.cloudinary.createUploadWidget(
     {
-      cloudName: cloudName,
-      uploadPreset: uploadPreset,
+      cloudName: process.env.cloudName,
+      uploadPreset: process.env.uploadPreset,
       cropping: true,
       multiple: false,
     },
@@ -175,7 +174,6 @@ function Profile({ user }) {
           </div>
           <div className="field">
             <p className="control">
-             
               <motion.button
                 className="button is-success"
                 whileHover={{ scale: 1.1 }}

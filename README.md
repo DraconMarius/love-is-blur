@@ -2,7 +2,9 @@
 
 ## Description
 
-[Click here for a link to the deployed app!]()
+Our dating app is all about prioritizing values over looks. Instead of basing decisions on appearances, our app encourages users to get to know each other on a deeper level. This is made possible by not allowing users to see each other's photos. Our app is built using React, GraphQL, Apollo, material-UI, Bulma and Mongoose among others. These technologies allow us to create a unique and user-friendly experience. Whether you're looking for a long-term relationship or just looking to meet new people, give our app a try and see the difference for yourself!
+
+[Click here for a link to the deployed app!](https://love-is-blur.herokuapp.com/)
 
 ## Table of Contents
 
@@ -17,17 +19,63 @@
 
 ## Usage
 
-We also have a dummy account set up if you'd like to use that to login & checkout our features:
-
-> username: dummyAccount
-
-> email: dummyAccount@gmail.com
-
-> password: dummyAccount1!
+To run our app on your local machine all you need to do is fork the repo, install the dependencies, run "npm run seed" and "npm run develop" in the root directory and it will start up the server and webpage.
 
 ## Features
 
 # Homepage
+
+The first thing you see is our homepage, with a few sections if you scroll down it you see the text effects. This was made with framer and react-moving-text.
+[homepage gif](./client/gifs/home.gif)
+
+# Sign Up
+
+The first thing you need to do is sign up and upload a photo and name and bio about yourself. We use the cloudinary widget to upload photos for storage.heres a gif of what sign up looks like:
+[sign up gif](./client/gifs/signup.gif)
+
+# Swipe
+
+Next, you cant get to the swiping. Our swiping was somwhat based off of tinder and we use react-tinder-card npm pacakge to give it funtionality. If someone you liked, also likes you back, you will be notified.
+[swipe gif](./client/gifs/swipe.gif)
+
+# Chat
+
+We have a chat page where all you matches will be located and where you can message them. Here's what is looks like:
+[chat gif](./client/gifs/chat.gif)
+
+# Edit Profile
+
+The edit profile page is wher eyou can upload a new image and update your bio and name.
+[edit profile gif](./client/gifs/editProfile.gif)
+
+## Code Snippets
+
+An interesting snippet is where we upload the Cloudinary widget so we can upload photos:
+
+```
+const myWidget = window.cloudinary.createUploadWidget(
+  {
+    cloudName: process.env.cloudName,
+    uploadPreset: process.env.uploadPreset,
+    cropping: true,
+    multiple: false,
+  },
+  (error, result) => {
+    if (!error && result && result.event === "success") {
+      console.log("Done! Here is the image info: ", result.info);
+      // const urlString = result.info.url
+      imgURL.current = result.info.url;
+      console.log(result.info.url);
+      console.log(imgURL.current);
+    }
+  }
+);
+//function to open the cloudinary widget
+const openWidget = (myWidget) => {
+  // event.preventDefault();
+  myWidget.open();
+};
+```
 
 ## License
 
